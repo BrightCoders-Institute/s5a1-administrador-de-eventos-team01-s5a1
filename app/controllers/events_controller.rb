@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-
 # Class...
 class EventsController < ApplicationController
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
   def index
     @events = Event.all
   end
 
   def show
-    @event = Event.find(params[:id])
   end
 
   def new
@@ -26,12 +25,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
-
     if @event.update(events_params)
       redirect_to @event
     else
@@ -40,12 +36,15 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
     redirect_to root_path
   end
 
   private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
   def events_params
     params.require(:event).permit(:title, :description, :date, :location, :price)
