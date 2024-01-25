@@ -1,0 +1,7 @@
+<h2>Event details</h2>
+<%= render 'event', event: @event %>
+<br />
+<%= link_to 'Edit event', edit_event_path(@event) %>
+<br />
+<%= button_to 'Delete event', event_path(@event), method: :delete, data:
+{turbo_confirm: "Are you sure?"} %> <%= link_to 'Back', events_path %>

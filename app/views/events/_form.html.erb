@@ -1,0 +1,42 @@
+<%= form_with model: event do |form| %> 
+    <% if form.object.errors.any? %>
+        <div>
+            <% form.object.errors.full_messages.each do |message| %>
+                <div><%= message %></div>
+            <% end %>
+        </div>
+        <br>
+    <% end %>
+
+    <div>
+        <%= form.label :title, 'Title' %> <br>
+        <%=form.text_field :title%>
+    </div>
+    <br>
+
+    <div>
+        <%= form.label :description, 'Description' %> <br>
+        <%= form.text_area :description %> 
+    </div>
+    <br>
+
+    <div>
+        <%= form.label :date, 'Date' %> <br>
+        <%= form.datetime_local_field  :date %>
+    </div>
+    <br>
+
+    <div>
+        <%= form.label :location, 'Location' %> <br>
+        <%= form.text_field :location %> 
+    </div>
+    <br>
+
+    <div>
+        <%= form.label :price, 'Price'%> <br>
+        <%= form.number_field :price, step: 0.01  %>
+    </div> 
+    <br>
+    
+    <%= form.submit %> 
+<% end %>
