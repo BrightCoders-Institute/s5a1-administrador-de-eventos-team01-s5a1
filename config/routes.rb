@@ -9,13 +9,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'events#index'
-
-  get '/events', to: 'events#index', as: 'events'
-  post '/events', to: 'events#create'
-  get '/event/new', to: 'events#new', as: 'new_event'
-  get '/event/:id', to: 'events#show', as: 'event'
-  get '/event/:id/edit', to: 'events#edit', as: 'edit_event'
-  put '/event/:id', to: 'events#update'
-  patch '/event/:id', to: 'events#update'
-  delete '/event/:id', to: 'events#destroy'
+  resources :events
 end
