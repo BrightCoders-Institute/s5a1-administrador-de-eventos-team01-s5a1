@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>models /</small> event_test.rb</h3>
+      <h3><small>models /</small> event_spec.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -62,21 +62,21 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating b big">
-              B
+            <div class="rating c big">
+              C
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">73</span><small> lines of codes</small></div>
+              <div><span class="metric">78</span><small> lines of codes</small></div>
               <div><span class="metric">1</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">58.6</span><small> complexity/method</small></div>
-              <div><span class="metric">4</span><small> churn</small></div>
+              <div><span class="metric">113.6</span><small> complexity/method</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">58.61</span><small> complexity</small></div>
+              <div><span class="metric">113.64</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                1
+                0
                 smell
               </a>
             </li>
@@ -99,69 +99,72 @@
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
 
-require &#39;test_helper&#39;
+# rubocop:disable Metrics/BlockLength
 
-# Initializing tests.
-class EventTest &lt; ActiveSupport::TestCase<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="https://github.com/troessner/reek/blob/master/docs/Instance-Variable-Assumption.md" target="_blank"><b>InstanceVariableAssumption</b></a>        </span>      </div>      <span>EventTest assumes too much for instance variable '@event'</span>          </div>  </li></ol>
-  setup do
+require &#39;rails_helper&#39;
+
+RSpec.describe Event, type: :model do
+  before do
     @event = Event.new(title: &#39;title&#39;, description: &#39;description&#39;,
                        date: Time.current, location: &#39;location&#39;, price: 10.5)
   end
 
-  test &#39;Event valid? with empty title returns false&#39; do
-    update_test_model_attribute(&#39;title&#39;, nil)
-    refute @event.valid?
-  end
+  describe &#39;Event model data&#39; do
+    it &#39;valid? returns false when Event has empty title&#39; do
+      update_test_model_attribute(&#39;title&#39;, nil)
+      expect(@event.valid?).to be false
+    end
 
-  test &#39;Event valid? with non empty title returns true&#39; do
-    update_test_model_attribute(&#39;title&#39;, &#39;Title&#39;)
-    assert @event.valid?
-  end
+    it &#39;valid? returns true when Event has a non empty title&#39; do
+      update_test_model_attribute(&#39;title&#39;, &#39;Title&#39;)
+      expect(@event.valid?).to be true
+    end
 
-  test &#39;Event valid? with empty description returns false&#39; do
-    update_test_model_attribute(&#39;description&#39;, nil)
-    refute @event.valid?
-  end
+    it &#39;valid? returns false when Event has empty description&#39; do
+      update_test_model_attribute(&#39;description&#39;, nil)
+      expect(@event.valid?).to be false
+    end
 
-  test &#39;Event valid? with non empty description returns true&#39; do
-    update_test_model_attribute(&#39;description&#39;, &#39;Description&#39;)
-    assert @event.valid?
-  end
+    it &#39;valid? returns true when Event has a non empty description&#39; do
+      update_test_model_attribute(&#39;description&#39;, &#39;Description&#39;)
+      expect(@event.valid?).to be true
+    end
 
-  test &#39;Event valid? with empty date returns false&#39; do
-    update_test_model_attribute(&#39;date&#39;, nil)
-    refute @event.valid?
-  end
+    it &#39;valid? returns false when Event has empty date&#39; do
+      update_test_model_attribute(&#39;date&#39;, nil)
+      expect(@event.valid?).to be false
+    end
 
-  test &#39;Event valid? with non empty date returns true&#39; do
-    update_test_model_attribute(&#39;date&#39;, Time.current)
-    assert @event.valid?
-  end
+    it &#39;valid? returns true when Event has a non empty date&#39; do
+      update_test_model_attribute(&#39;date&#39;, Time.current)
+      expect(@event.valid?).to be true
+    end
 
-  test &#39;Event valid? with empty location returns false&#39; do
-    update_test_model_attribute(&#39;location&#39;, nil)
-    refute @event.valid?
-  end
+    it &#39;valid? returns false when Event has empty location&#39; do
+      update_test_model_attribute(&#39;location&#39;, nil)
+      expect(@event.valid?).to be false
+    end
 
-  test &#39;Event valid? with non empty location returns true&#39; do
-    update_test_model_attribute(&#39;location&#39;, &#39;Location&#39;)
-    assert @event.valid?
-  end
+    it &#39;valid? returns true when Event has a non empty location&#39; do
+      update_test_model_attribute(&#39;location&#39;, &#39;Location&#39;)
+      expect(@event.valid?).to be true
+    end
 
-  test &#39;Event valid? with empty price returns false&#39; do
-    update_test_model_attribute(&#39;price&#39;, nil)
-    refute @event.valid?
-  end
+    it &#39;valid? returns false when Event has empty price&#39; do
+      update_test_model_attribute(&#39;price&#39;, nil)
+      expect(@event.valid?).to be false
+    end
 
-  test &#39;Event valid? with non empty price returns true&#39; do
-    update_test_model_attribute(&#39;price&#39;, 10.10)
-    assert @event.valid?
-  end
+    it &#39;valid? returns true when Event has a non empty price&#39; do
+      update_test_model_attribute(&#39;price&#39;, 10.10)
+      expect(@event.valid?).to be true
+    end
 
-  test &#39;Event valid? with non empty fields&#39; do
-    @event = Event.new(title: &#39;title&#39;, description: &#39;description&#39;,
-                       date: Time.current, location: &#39;location&#39;, price: 10.5)
-    assert @event.valid?
+    it &#39;valid? returns true when Event has no empty fields&#39; do
+      @event = Event.new(title: &#39;title&#39;, description: &#39;description&#39;,
+                         date: Time.current, location: &#39;location&#39;, price: 10.5)
+      expect(@event.valid?).to be true
+    end
   end
 
   private
@@ -170,6 +173,8 @@ class EventTest &lt; ActiveSupport::TestCase<ol class="nocode errors smells">  <
     @event[attribute] = new_value
   end
 end
+
+# rubocop:enable Metrics/BlockLength
 </code>
   </div>
 </div>

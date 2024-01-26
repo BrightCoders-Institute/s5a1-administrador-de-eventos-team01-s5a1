@@ -52,7 +52,7 @@
       </span>
     </div>
     <div>
-      <h3><small>controllers /</small> events_controller_test.rb</h3>
+      <h3><small>requests /</small> events_spec.rb</h3>
     </div>
   </div>
   <!--End Page Title -->
@@ -62,22 +62,22 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating a big">
-              A
+            <div class="rating d big">
+              D
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">65</span><small> lines of codes</small></div>
+              <div><span class="metric">111</span><small> lines of codes</small></div>
               <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">3</span><small> churn</small></div>
+              <div><span class="metric">0</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">43.2</span><small> complexity</small></div>
-              <div><span class="metric">0</span><small> duplications</small></div>
+              <div><span class="metric">157.83</span><small> complexity</small></div>
+              <div><span class="metric">52</span><small> duplications</small></div>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                0
+                1
                 smell
               </a>
             </li>
@@ -99,69 +99,115 @@
 
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
 
-require &#39;test_helper&#39;
+# rubocop:disable Metrics/BlockLength
 
-# Initializing test.
-class EventsControllerTest &lt; ActionController::TestCase
-  setup do
+require &#39;rails_helper&#39;
+
+RSpec.describe &#39;Events&#39;, type: :request do
+  before do
     @event = Event.where(title: &#39;FirstEvent&#39;).first
   end
 
-  test &#39;should get index&#39; do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:events)
+  describe &#39;EventsController GET index&#39; do
+    it &#39;responds successfully&#39; do
+      get events_path
+      expect(response).to be_successful
+    end
   end
 
-  test &#39;should get show&#39; do
-    get :show, params: { id: @event.id }
-    assert_response :success
-  end
-
-  test &#39;should get new&#39; do
-    get :new
-    assert_response :success
-  end
-
-  test &#39;should create event&#39; do
-    assert_difference(&#39;Event.count&#39;) do
-      post :create, params: { event:
-                                    {
-                                      title: &#39;New Event&#39;,
-                                      description: &#39;Description&#39;,
-                                      date: &#39;2024-01-25&#39;,
-                                      location: &#39;Location&#39;,
-                                      price: 10.5
-                                    } }
+  describe &#39;EventsController GET show&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="events_spec.html#L19" class="js-smell-location">0</a>                  <a href="events_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li></ol>
+    it &#39;responds successfully with valid ID&#39; do
+      get event_path(@event)
+      expect(response).to be_successful
     end
 
-    assert_redirected_to event_path(assigns(:event))
+    it &#39;responds with error when invalid ID&#39; do
+      get event_path(&#39;Invalid&#39;)
+      expect(response).to_not be_successful
+    end
   end
 
-  test &#39;should get edit&#39; do
-    get :edit, params: { id: @event.id }
-    assert_response :success
+  describe &#39;EventsController GET new&#39; do
+    it &#39;responds successfully&#39; do
+      get new_event_path
+      expect(response).to be_successful
+    end
   end
 
-  test &#39;should update event&#39; do
-    patch :update, params: { id: @event.id, event: {
-      title: &#39;Updated Event&#39;,
-      description: &#39;Updated Description&#39;,
-      date: &#39;2024-01-26&#39;,
-      location: &#39;Updated Location&#39;,
-      price: 15.5
-    } }
-    assert_redirected_to event_path(assigns(:event))
-  end
-
-  test &#39;should destroy event&#39; do
-    assert_difference(&#39;Event.count&#39;, -1) do
-      delete :destroy, params: { id: @event.id }
+  describe &#39;EventsController POST create&#39; do
+    it &#39;responds successfully with valid event&#39; do
+      post events_path, params: { event: {
+        title: &#39;New Event&#39;,
+        description: &#39;Description&#39;,
+        date: Time.current,
+        location: &#39;Location&#39;,
+        price: 10.5
+      } }
+      expect(response).to have_http_status(302)
     end
 
-    assert_redirected_to root_path
+    it &#39;responds with error when invalid ID&#39; do
+      post events_path, params: { event: {
+        title: nil,
+        description: &#39;Description&#39;,
+        date: Time.current,
+        location: &#39;Location&#39;,
+        price: 10.5
+      } }
+      expect(response).to_not be_successful
+    end
+  end
+
+  describe &#39;EventsController GET edit&#39; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="events_spec.html#L19" class="js-smell-location">0</a>                  <a href="events_spec.html#L62" class="js-smell-location">1</a>                  </div>  </li></ol>
+    it &#39;responds successfully with valid ID&#39; do
+      get edit_event_path(@event)
+      expect(response).to be_successful
+    end
+
+    it &#39;responds with error when invalid ID&#39; do
+      get edit_event_path(&#39;Invalid&#39;)
+      expect(response).to_not be_successful
+    end
+  end
+
+  describe &#39;EventsController PUT update&#39; do
+    it &#39;responds successfully with valid event&#39; do
+      put event_path(@event), params: { id: @event.id, event: {
+        title: &#39;New Event&#39;,
+        description: &#39;Description&#39;,
+        date: Time.current,
+        location: &#39;Location&#39;,
+        price: 10.5
+      } }
+      expect(response).to have_http_status(302)
+    end
+
+    it &#39;responds with error when invalid event&#39; do
+      put event_path(@event), params: { id: @event.id, event: {
+        title: nil,
+        description: &#39;Description&#39;,
+        date: Time.current,
+        location: &#39;Location&#39;,
+        price: 10.5
+      } }
+      expect(response).to_not be_successful
+    end
+  end
+
+  describe &#39;EventsController DELETE destroy&#39; do
+    it &#39;responds successfully with valid ID&#39; do
+      delete event_path(@event)
+      expect(response).to have_http_status(302)
+    end
+
+    it &#39;responds with error when invalid ID&#39; do
+      delete event_path(&#39;Invalid&#39;)
+      expect(response).to_not be_successful
+    end
   end
 end
+
+# rubocop:enable Metrics/BlockLength
 </code>
   </div>
 </div>
