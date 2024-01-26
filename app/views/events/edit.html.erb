@@ -1,3 +1,3 @@
 <h1>Edit event</h1>
 <%= render 'form', event: @event %>
-<%= button_to 'Back', events_path, method: :get, class: 'btn-3 ml-5' %>
+<%= link_to 'Back', event_path(@event), class: 'btn-3 ml-5 py-1 no-underline' %>

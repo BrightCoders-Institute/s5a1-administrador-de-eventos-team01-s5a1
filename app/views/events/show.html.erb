@@ -1,12 +1,15 @@
+<h1>Event details</h1>
 <div class="ml-5">
-<h2 class="font-bold text-4xl">Event details</h2>
+  <%= render 'event', event: @event %>
 
-<%= render 'event', event: @event %>
+  <div class="mb-3">
+    <%= link_to 'Edit event', edit_event_path(@event), class: 'btn-1 py-1 no-underline mb-6' %>
+  </div>
 
-<%= button_to 'Edit event', edit_event_path(@event), method: :get, class: 'btn-1' %>
-<div class="">
-<%= button_to 'Delete event', event_path(@event), class: 'btn-2', 
-method: :delete, data: {turbo_confirm: "Are you sure?"} %> 
-</div>
-<%= button_to 'Back', events_path, method: :get, class: 'btn-3' %>
+  <%= button_to 'Delete event', event_path(@event), class: 'btn-2 mb-3', 
+  method: :delete, data: {turbo_confirm: "Are you sure?"} %> 
+
+  <div class="mb-3">
+    <%= link_to 'Back', events_path, class: 'btn-3 py-1 no-underline' %>
+  </div>
 </div>
