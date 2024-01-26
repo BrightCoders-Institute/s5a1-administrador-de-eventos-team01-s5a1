@@ -69,3 +69,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.3"
+
+gem "rails-controller-testing", "~> 1.0"

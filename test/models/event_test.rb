@@ -59,6 +59,12 @@ class EventTest < ActiveSupport::TestCase
     assert @event.valid?
   end
 
+  test "Event valid? with non empty fields" do
+    @event = Event.new(title: "title", description: "description",
+                       date: Time.current, location: "location", price: 10.5)
+    assert @event.valid?
+  end
+
   private
 
   def update_test_model_attribute(attribute, new_value)

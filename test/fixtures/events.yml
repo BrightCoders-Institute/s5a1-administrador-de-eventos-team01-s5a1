@@ -1,14 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: FirstEvent
   description: MyText
   location: MyString
   price: 1.5
   date: 2024-01-23 19:52:29
 
 two:
-  title: MyString
+  title: SecondEvent
   description: MyText
   location: MyString
   price: 1.5
