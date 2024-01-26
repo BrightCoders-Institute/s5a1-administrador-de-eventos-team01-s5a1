@@ -18,7 +18,8 @@
         <%= image_tag("logo.png", class:"my-0 h-4/5") %>
       </div>
       <div class="mx-4 py-5">
-        <button class="bg-black rounded py-5 px-2 text-white font-bold">GetStarted</button>
+        <%= button_to "GetStarted", "events#index" , method: :get, class:"bg-black rounded py-5 px-2 text-white font-bold"%>
+
       </div>
     </nav>
     <%= yield %>
