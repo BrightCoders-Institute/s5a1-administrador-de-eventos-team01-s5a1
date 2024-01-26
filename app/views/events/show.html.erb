@@ -1,0 +1,5 @@
+<h2>Event details</h2>
+<%= render 'event', event: @event %>
+<div style="margin-bottom: 10px"><%= link_to 'Edit event', edit_event_path(@event) %></div>
+<%= button_to 'Delete event', event_path(@event), style: "margin-bottom: 10px", 
+method: :delete, data: {turbo_confirm: "Are you sure?"} %> <%= link_to 'Back', events_path %>
