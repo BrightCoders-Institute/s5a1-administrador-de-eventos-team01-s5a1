@@ -12,12 +12,14 @@
   </head>
 
   <body class="prose">
-    <nav class="bg-gray-800 h-20 border-black">
-      <div>
-        Bright coders
+
+    <nav class="bg-black h-28 w-screen flex flex-row ">
+      <div class="mx-4 py-5">
+        <%= image_tag("logo.png", class:"my-0 h-4/5") %>
       </div>
-      <div>
-        GetStated
+      <div class="mx-4 py-5">
+        <button class="bg-black rounded py-5 px-2 text-white font-bold">GetStarted</button>
+      </div>
     </nav>
     <%= yield %>
   </body>
