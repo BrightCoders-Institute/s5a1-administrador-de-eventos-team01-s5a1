@@ -6,10 +6,3 @@ one:
   location: MyString
   price: 1.5
   date: 2024-01-23 19:52:29
-
-two:
-  title: SecondEvent
-  description: MyText
-  location: MyString
-  price: 1.5
-  date: 2024-01-23 19:52:29

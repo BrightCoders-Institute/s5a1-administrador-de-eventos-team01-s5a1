@@ -71,3 +71,9 @@ end
 gem "tailwindcss-rails", "~> 2.3"
 
 gem "rails-controller-testing", "~> 1.0"
+
+gem "rubocop", "~> 1.60"
+
+gem "reek", "~> 1.3"
+
+gem "rubycritic", "~> 0.0.16"

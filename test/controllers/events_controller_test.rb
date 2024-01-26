@@ -5,7 +5,7 @@ require 'test_helper'
 # Initializing test.
 class EventsControllerTest < ActionController::TestCase
   setup do
-    @event = Event.where(title: "FirstEvent").first
+    @event = Event.where(title: 'FirstEvent').first
   end
 
   test 'should get index' do
@@ -33,11 +33,10 @@ class EventsControllerTest < ActionController::TestCase
                                       date: '2024-01-25',
                                       location: 'Location',
                                       price: 10.5
-                                    }
-                            }
-      end
+                                    } }
+    end
 
-      assert_redirected_to event_path(assigns(:event))
+    assert_redirected_to event_path(assigns(:event))
   end
 
   test 'should get edit' do
@@ -47,13 +46,12 @@ class EventsControllerTest < ActionController::TestCase
 
   test 'should update event' do
     patch :update, params: { id: @event.id, event: {
-                                                      title: 'Updated Event',
-                                                      description: 'Updated Description',
-                                                      date: '2024-01-26',
-                                                      location: 'Updated Location',
-                                                      price: 15.5
-                                                   }
-                           }
+      title: 'Updated Event',
+      description: 'Updated Description',
+      date: '2024-01-26',
+      location: 'Updated Location',
+      price: 15.5
+    } }
     assert_redirected_to event_path(assigns(:event))
   end
 
