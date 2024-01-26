@@ -1,36 +1,38 @@
 <%= form_with model: event do |form| %> 
   <% if form.object.errors.any? %>
-    <div>
+    <div class="mb-4">
       <% form.object.errors.full_messages.each do |message| %>
         <div><%= message %></div>
       <% end %>
     </div>
   <% end %>
 
-  <div style="margin-bottom: 15px">
-    <%= form.label :title, 'Title', style: "display: block" %>
-    <%= form.text_field :title%>
-  </div>
+  <div class="ml-5">
+    <div class="mb-4">
+      <%= form.label :title, 'Title', class: 'block b' %>
+      <%= form.text_field :title, class: 'field'%>
+    </div>
 
-  <div style="margin-bottom: 15px">
-    <%= form.label :description, 'Description', style: "display: block" %>
-    <%= form.text_area :description %> 
-  </div>
+    <div class="mb-4">
+      <%= form.label :description, 'Description', class: 'block b' %>
+      <%= form.text_area :description, class: 'field' %> 
+    </div>
 
-  <div style="margin-bottom: 15px">
-    <%= form.label :date, 'Date', style: "display: block" %>
-    <%= form.datetime_local_field  :date %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :date, 'Date', class: 'block b' %>
+      <%= form.datetime_local_field  :date, class: 'field' %>
+    </div>
 
-  <div style="margin-bottom: 15px">
-    <%= form.label :location, 'Location', style: "display: block" %>
-    <%= form.text_field :location %> 
-  </div>
+    <div class="mb-4">
+      <%= form.label :location, 'Location', class: 'block b' %>
+      <%= form.text_field :location, class: 'field' %> 
+    </div>
 
-  <div style="margin-bottom: 15px">
-    <%= form.label :price, 'Price', style: "display: block" %>
-    <%= form.number_field :price, step: 0.01  %>
+    <div class="mb-4">
+      <%= form.label :price, 'Price', class: 'block b' %>
+      <%= form.number_field :price, step: 0.01, class: 'field'  %>
+    </div> 
+
+    <%= form.submit class: 'btn-2 mb-3' %>
   </div> 
-    
-  <%= form.submit style: "margin-bottom: 15px" %> 
 <% end %>
