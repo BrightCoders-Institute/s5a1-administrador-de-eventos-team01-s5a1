@@ -1,9 +1,9 @@
 <h1>Events lists</h1>
-<div class="">
+<div>
   <%= link_to "Create new event", new_event_path %>
 </div>
 
 <% @events.each_with_index do |event, index| %>    
   <h2><%= "Event no. #{format("%02d", (index + 1).to_s)} #{event.title}" %></h2>
-  <div class=""><%= link_to 'Show event details', event_path(event) %></div>
+  <div><%= link_to 'Show event details', event_path(event) %></div>
 <% end %>

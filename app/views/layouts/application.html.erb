@@ -12,16 +12,7 @@
   </head>
 
   <body class="prose">
-
-    <nav class="bg-black h-28 w-screen flex flex-row ">
-      <div class="mx-4 py-5">
-        <%= image_tag("logo.png", class:"my-0 h-4/5") %>
-      </div>
-      <div class="mx-4 py-5">
-        <%= button_to "GetStarted", "events#index" , method: :get, class:"bg-black rounded py-5 px-2 text-white font-bold"%>
-
-      </div>
-    </nav>
+    <%= render 'layouts/navbar' %>
     <%= yield %>
   </body>
 </html>
