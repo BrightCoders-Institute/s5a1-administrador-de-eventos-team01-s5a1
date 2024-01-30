@@ -1,9 +1,33 @@
 <nav class="bg-black h-28 w-screen flex flex-row ">
-  <div class="mx-4 py-5">
+  <div class="mx-4 py-5 flex items-center">
     <%= image_tag("logo.png", class:"my-0 h-4/5") %>
   </div>
-  <div class="mx-4 py-5">
-    <%= link_to "GetStarted", "events#index", class:"bg-black rounded py-5 px-2 text-white font-bold"%>
 
+  <div class="mx-4 py-5 flex items-center">
+    <%= link_to "Home", root_path, class:"bg-black rounded py-5 px-2 text-white font-bold" %>
   </div>
+
+  <% if user_signed_in? %>
+    <div class="mx-4 py-5 flex items-center">
+      <%= link_to "Get Started", events_path, class:"bg-black rounded py-5 px-2 text-white font-bold" %>
+    </div>
+  <% end %>
+
+  <div class="mx-4 py-5 flex items-center">
+    <% if user_signed_in? %>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class:"underline bg-black rounded py-5 px-2 text-white font-bold" %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path, class:"bg-black rounded py-5 px-2 text-white font-bold" %>
+    <% end %>
+  </div>
+
+  <!--
+  <div class="justify-self-end">
+    <% if user_signed_in? %>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class:"bg-black rounded py-5 px-2 text-white font-bold" %>
+    <% else %>
+      <%= "Guest User" %>
+    <% end %>
+  </div>
+  -->
 </nav>
