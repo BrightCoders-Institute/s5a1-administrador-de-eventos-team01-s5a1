@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Clase del controlador de Eventos
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authenticate_user!
