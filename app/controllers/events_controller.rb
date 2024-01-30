@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
-# Class...
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+
   def index
     @events = Event.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @event = Event.new
@@ -24,8 +23,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @event.update(events_params)
@@ -49,6 +47,6 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.require(:event).permit(:title, :description, :date, :location, :price)
+    params.require(:event).permit(:title, :description, :date, :location, :price, :image)
   end
 end

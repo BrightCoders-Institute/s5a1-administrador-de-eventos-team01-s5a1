@@ -33,6 +33,11 @@
       <%= form.number_field :price, step: 0.01, class: 'field'  %>
     </div> 
 
+    <div class="mb-6">
+      <%= form.label :price, 'Image', class: 'block b' %>
+      <%= form.file_field :image %>
+    </div>
+
     <%= form.submit class: 'btn-2 mb-3' %>
   </div> 
 <% end %>
