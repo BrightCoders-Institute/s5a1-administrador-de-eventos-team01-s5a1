@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Event model class to manage all the
+# events data (validations and relationships).
 class Event < ApplicationRecord
   has_one_attached :image
 

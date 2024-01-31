@@ -36,12 +36,11 @@
     <%= form.label :image, 'Image', class: 'block b' %>
     <%= render_image_file_field form %>
     <%= render_event_image_if_exists event, 'mt-2 mb-1' %>
-    <%= render_delete_option_if_image_attached form, event %>
+    <%= render_delete_option_if_image_attached event %>
   </div>
 
   <div class="flex">
     <div><%= form.submit class: 'btn-2 mb-3' %></div>
-    <div><%= link_to 'Back', events_path, class: 'btn-3 ml-3 py-1 no-underline' %></div>
+    <div><%= link_to 'Back', event, class: 'btn-3 ml-3 py-1 no-underline' %></div>
   </div>
 <% end %>
-<% console %>

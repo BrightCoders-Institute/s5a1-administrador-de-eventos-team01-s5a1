@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class to manage all the events views and data (models).
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update purge_image destroy]
   before_action :authenticate_user!
@@ -55,9 +56,9 @@ class EventsController < ApplicationController
     @event.image.attach(previous_attachment_blob)
 
     # Preserve the previous generated errors.
-    if @event.errors.empty?
-      generated_errors.each { |error| @event.errors.add(error.attribute, error.type, **error.options) }
-    end
+    return unless @event.errors.empty?
+
+    generated_errors.each { |error| @event.errors.add(error.attribute, error.type, **error.options) }
   end
 
   def set_event
