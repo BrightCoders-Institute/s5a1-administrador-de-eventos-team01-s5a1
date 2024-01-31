@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# Module to setup the application layout and navbar
-# helpers (this in order to achieve a cleaner code).
 module ApplicationHelper
   def print_home_link
     link_to 'Home', root_path, class: 'no-underline mx-4 text-gray-100 hover:text-gray-300 font-bold'

@@ -34,9 +34,12 @@
 
   <div class="mb-4">
     <%= form.label :image, 'Image', class: 'block b' %>
-    <%= render_image_file_field form %>
-    <%= render_event_image_if_exists event, 'mt-2 mb-1' %>
-    <%= render_delete_option_if_image_attached event %>
+    <%= image_file_field form %>
+
+    <% if event.image_is_saved_and_exists? %>
+      <%= preview_event_image event, 'mt-2 mb-1' %>
+      <%= delete_image_option event %>
+    <% end %>
   </div>
 
   <div class="flex">

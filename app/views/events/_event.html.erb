@@ -4,5 +4,5 @@
   <div><span class="font-bold	text-lg">Event date:</span> <%= event.date %></div>
   <div><span class="font-bold	text-lg">Event location:</span> <%= event.location %></div>
   <div><span class="font-bold	text-lg">Event price:</span> <%= event.price %></div>
-  <div><%= render_event_image_if_exists event %></div>
+  <%= event_image event if event.image_is_saved_and_exists? %>
 </div>
