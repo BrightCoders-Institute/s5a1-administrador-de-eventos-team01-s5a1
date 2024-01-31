@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+  
   def print_home_link
     link_to "Home", root_path, class:"bg-black rounded px-2 mx-4 text-white font-bold"
   end

@@ -78,3 +78,5 @@ gem "reek", "~> 1.3"
 gem "rubycritic", "~> 0.0.16"
 
 gem "rubocop-rails", "~> 2.23"
+
+gem "pagy", "~> 6.4"
