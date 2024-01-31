@@ -28,13 +28,14 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
+    # Save the previous attached image data.
     previous_image_exists = @event.image_exists?
     previous_attachment_blob = @event.image.blob if previous_image_exists
 
     if @event.update(events_params)
       redirect_to @event
     else
-      preserve_event_errors(previous_attachment_blob) if previous_image_exists
+      reattach_image(previous_attachment_blob) if previous_image_exists
       render :edit, status: :unprocessable_entity
     end
   end
@@ -51,13 +52,15 @@ class EventsController < ApplicationController
 
   private
 
-  def preserve_event_errors(previous_attachment_blob)
+  def reattach_image(previous_attachment_blob)
+    # Reattach the previous image and preserve the
+    # generated validation errors with the last one.
     generated_errors = @event.errors.dup
     @event.image.attach(previous_attachment_blob)
 
-    # Preserve the previous generated errors.
     return unless @event.errors.empty?
 
+    # Preserve the previous generated errors.
     generated_errors.each { |error| @event.errors.add(error.attribute, error.type, **error.options) }
   end
 
