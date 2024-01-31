@@ -11,8 +11,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="prose">
+  <body class="prose h-screen min-w-full flex flex-col">
     <%= render 'shared/navbar' %>
-    <%= yield %>
+    <div class="flex-grow p-10"><%= yield %></div>
   </body>
 </html>
