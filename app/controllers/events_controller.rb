@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy]
+  before_action :set_event, only: %i[show edit update purge_image destroy]
   before_action :authenticate_user!
 
   def index
@@ -27,11 +27,20 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
+    previous_image_exists = @event.image_is_saved_and_exists?
+    previous_attachment_blob = @event.image.blob if previous_image_exists
+
     if @event.update(events_params)
       redirect_to @event
     else
+      reattach_image(previous_attachment_blob) if previous_image_exists
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def purge_image
+    @event.image.purge
+    redirect_to @event
   end
 
   def destroy
@@ -41,13 +50,30 @@ class EventsController < ApplicationController
 
   private
 
+  def reattach_image(previous_attachment_blob)
+    generated_errors = @event.errors.dup
+    @event.image.attach(previous_attachment_blob)
+
+    return unless @event.errors.empty?
+
+    save_previous_generated_errors(generated_errors)
+  end
+
+  def save_previous_generated_errors(generated_errors)
+    generated_errors.each { |error| @event.errors.add(error.attribute, error.type, **error.options) }
+  end
+
   def set_event
     @event = Event.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end
 
+  def events_params_without_image
+    params.require(:event).except(:image)
+  end
+
   def events_params
-    params.require(:event).permit(:title, :description, :date, :location, :price)
+    params.require(:event).permit(:title, :description, :date, :location, :price, :image, :delete_image)
   end
 end

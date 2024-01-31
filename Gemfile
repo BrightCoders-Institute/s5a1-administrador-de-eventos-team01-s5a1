@@ -78,3 +78,9 @@ gem "reek", "~> 1.3"
 gem "rubycritic", "~> 0.0.16"
 
 gem "rubocop-rails", "~> 2.23"
+
+gem "active_storage_validations", "~> 1.1"
+
+gem "ruby-vips", "~> 2.2"
+
+gem "image_processing", "~> 1.12"
