@@ -5,5 +5,9 @@ Rails.application.routes.draw do
 
   # Events actions routes.
   root 'home#index'
-  resources :events
+  resources :events do
+    member do
+      delete :purge_image
+    end
+  end
 end

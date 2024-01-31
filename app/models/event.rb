@@ -8,4 +8,9 @@ class Event < ApplicationRecord
   validates :date, presence: true
   validates :location, presence: true
   validates :price, presence: true
+  validates :image, size: { less_than: 10.megabytes }, content_type: ['image/jpg', 'image/png', 'image/jpeg']
+
+  def image_exists?
+    image.attached? && image.blob.present? && image.blob.persisted?
+  end
 end
