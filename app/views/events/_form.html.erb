@@ -7,6 +7,8 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
   <div class="mb-4">
     <%= form.label :title, 'Title', class: 'block b' %>
     <%= form.text_field :title, class: 'field'%>
@@ -19,7 +21,7 @@
 
   <div class="mb-4">
     <%= form.label :date, 'Date', class: 'block b' %>
-    <%= form.datetime_local_field  :date, class: 'field' %>
+    <%= form.date_field :date, class: 'field' %>
   </div>
 
   <div class="mb-4">
@@ -27,10 +29,15 @@
     <%= form.text_field :location, class: 'field' %> 
   </div>
 
-  <div class="mb-4">
+  <div class="mb-2">
     <%= form.label :price, 'Price', class: 'block b' %>
-    <%= form.number_field :price, step: 0.01, class: 'field'  %>
-  </div> 
+    <%= form.number_field :price, step: 0.01, class: 'field' %>
+  </div>
+
+  <div class="mb-4 flex items-center">
+    <%= form.check_box :public %>
+    <%= form.label :public, 'This event is public?', class: 'ml-2 font-semibold' %>
+  </div>
 
   <div class="mb-4">
     <%= form.label :image, 'Image', class: 'block b' %>

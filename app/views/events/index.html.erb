@@ -1,8 +1,9 @@
-<h1>Events lists</h1>
+<h1 class="mb-6">Events lists</h1>
 <div><%= link_to "Create new event", new_event_path %></div>
 
 <% @events.each_with_index do |event, index| %>    
   <h2><%= "Event no. #{format("%02d", (index + 1).to_s)} - #{event.title.capitalize}" %></h2>
+  <%= preview_event_image event if event.image_is_saved_and_exists? %>
   <div><%= link_to 'Show event details', event_path(event) %></div>
 <% end %>
 

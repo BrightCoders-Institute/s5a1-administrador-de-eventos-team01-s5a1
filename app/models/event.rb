@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
+  belongs_to :user
+
   has_one_attached :image do |attachable|
     attachable.variant :preview, resize_to_limit: [200, 200]
   end
@@ -13,6 +15,7 @@ class Event < ApplicationRecord
   validates :image, size: { less_than: 10.megabytes }, content_type: ['image/jpg', 'image/png', 'image/jpeg']
 
   def image_is_saved_and_exists?
-    image.attached? && image.blob.present? && image.blob.persisted?
+    image_blob = image.blob
+    image.attached? && image_blob.present? && image_blob.persisted?
   end
 end

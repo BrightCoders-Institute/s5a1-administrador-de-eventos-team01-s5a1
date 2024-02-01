@@ -53,12 +53,13 @@ class EventsController < ApplicationController
   private
 
   def reattach_image(previous_attachment_blob)
-    generated_errors = @event.errors.dup
+    generated_errors = @event.errors
+    errors_copy = generated_errors.dup
     @event.image.attach(previous_attachment_blob)
 
-    return unless @event.errors.empty?
+    return unless generated_errors.empty?
 
-    save_previous_generated_errors(generated_errors)
+    save_previous_generated_errors(errors_copy)
   end
 
   def save_previous_generated_errors(generated_errors)
@@ -76,6 +77,7 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.require(:event).permit(:title, :description, :date, :location, :price, :image, :delete_image)
+    params.require(:event).permit(:title, :description, :date, :location,
+                                  :price, :public, :image, :delete_image, :user_id)
   end
 end

@@ -13,13 +13,13 @@ module EventsHelper
     end
   end
 
-  def event_image(event, classes='mt-3 mb-4')
+  def event_image(event, classes = 'mt-3 mb-4')
     tag.div do
       image_tag event.image, size: '300x300', class: classes
     end
   end
 
-  def preview_event_image(event, classes='mt-3 mb-4')
+  def preview_event_image(event, classes = 'mt-3 mb-4')
     tag.div do
       image_tag event.image.variant(:preview), class: classes
     end

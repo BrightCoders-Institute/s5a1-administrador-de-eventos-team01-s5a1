@@ -1,0 +1,22 @@
+---
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  FeatureEnvy:
+    exclude:
+      - "EventsController#save_previous_generated_errors"
+
+directories:
+  "app/controllers":
+    InstanceVariableAssumption:
+      enabled: false
+    NestedIterators:
+      enabled: false
+  "app/helpers":
+    UtilityFunction:
+      enabled: false
+
+exclude_paths:
+  - "db/migrate"
+  - "db/schema.rb"
+  - "config/application.rb"
