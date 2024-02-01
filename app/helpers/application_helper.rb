@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+  
   def print_home_link
     link_to 'Home', root_path, class: 'no-underline mx-4 text-gray-100 hover:text-gray-300 font-bold'
   end

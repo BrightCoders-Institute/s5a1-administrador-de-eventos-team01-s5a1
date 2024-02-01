@@ -6,3 +6,5 @@
   <%= preview_event_image event if event.image_is_saved_and_exists? %>
   <div><%= link_to 'Show event details', event_path(event) %></div>
 <% end %>
+
+<div class="mt-6"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
