@@ -7,6 +7,8 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
   <div class="mb-4">
     <%= form.label :title, 'Title', class: 'block b' %>
     <%= form.text_field :title, class: 'field'%>
@@ -29,7 +31,7 @@
 
   <div class="mb-4">
     <%= form.label :price, 'Price', class: 'block b' %>
-    <%= form.number_field :price, step: 0.01, class: 'field'  %>
+    <%= form.number_field :price, step: 0.01, class: 'field' %>
   </div> 
 
   <div class="mb-4">
