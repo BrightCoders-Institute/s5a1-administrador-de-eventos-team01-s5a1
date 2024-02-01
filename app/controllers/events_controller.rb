@@ -5,7 +5,9 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @events = Event.all
+    @pagy, @events = pagy(Event.all)
+  rescue Pagy::VariableError
+    redirect_to events_path(page: 1)
   end
 
   def show; end
