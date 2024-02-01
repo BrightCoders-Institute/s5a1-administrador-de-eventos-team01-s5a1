@@ -4,5 +4,6 @@
   <div><span class="font-bold	text-lg">Event date:</span> <%= event.date %></div>
   <div><span class="font-bold	text-lg">Event location:</span> <%= event.location %></div>
   <div><span class="font-bold	text-lg">Event price:</span> <%= event.price %></div>
+  <div><span class="font-bold	text-lg">Event is public?:</span> <%= event.public ? 'Yes' : 'No' %></div>
   <%= event_image event if event.image_is_saved_and_exists? %>
 </div>

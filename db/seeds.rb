@@ -10,8 +10,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-user = User.where(username: 'ErikGmz').first_or_initialize
-user.update(email: 'email', password: '123123', password_confirmation: '123123')
+user = User.where(username: 'BrightUser').first_or_initialize
+user.update(email: 'email@gmail.com', password: '123123', password_confirmation: '123123')
 
 event = user.events.where(title: 'Event no. 1').first_or_initialize
-event.update(description: 'Test event', date: Time.current, location: 'Test location', price: 10)
+event.update(description: 'Test event', date: Time.current, location: 'Test location', price: 10, public: false)
