@@ -8,5 +8,7 @@
     <div><%= link_to 'Show details', event_path(event), class: 'btn-2 no-underline' %></div>
   <% end %>
 
-  <div class="mt-6"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
+  <div class="mt-6">
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
 </div>
