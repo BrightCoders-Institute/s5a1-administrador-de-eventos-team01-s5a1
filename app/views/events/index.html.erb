@@ -1,14 +1,20 @@
-<div class="p-10">
-  <h1 class="mb-6">Events lists</h1>
-  <div><%= link_to "Create new event", new_event_path,class: 'btn_4'  %></div>
+<h1 class="mb-6">Events lists</h1>
+<div class='mb-10'><%= link_to "Create new event", new_event_path, class: 'btn-4 py-1' %></div>
 
-  <% @events.each_with_index do |event, index| %>    
-    <h2><%= "Event no. #{format("%02d", (index + 1).to_s)} - #{event.title.capitalize}" %></h2>
-    <%= preview_event_image event if event.image_is_saved_and_exists? %>
-    <div><%= link_to 'Show details', event_path(event), class: 'btn-2 no-underline' %></div>
+<%= render "search_filter_form" %>
+
+<% if @events.count > 0 %>
+  <% @events.each_with_index do |event, index| %>
+    <div class="mt-10">
+      <h2 class="mt-0 mb-3"><%= event.title.capitalize %></h2>
+      <h4 class="font-bold mb-5">Planned for <%= event.date %></h4>
+
+      <%= preview_event_image event if event.image_is_saved_and_exists? %>
+      <div><%= link_to 'Show event details', event_path(event), class: 'btn-2 py-1 no-underline' %></div>
+    </div>
   <% end %>
 
-  <div class="mt-6">
-    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
-  </div>
-</div>
+  <div class="mt-6"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
+<% else %>
+  <h2 class="mt-10 mb-0">No events found</h2>
+<% end %>

@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @pagy, @events = pagy(Event.all)
+    filter_events_list
   rescue Pagy::VariableError
     redirect_to events_path(page: 1)
   end
@@ -64,6 +64,21 @@ class EventsController < ApplicationController
 
   def save_previous_generated_errors(generated_errors)
     generated_errors.each { |error| @event.errors.add(error.attribute, error.type, **error.options) }
+  end
+
+  def filter_events_list
+    filtered_events = Event.all_user_events(current_user.id)
+
+    if params[:privates].present? && params[:privates]
+      filtered_events = filtered_events.only_private_events
+    end
+
+    if params[:dates_range].present? && params[:date_filter].present? && params[:date_filter]
+      dates_range = params[:dates_range].split(' - ').map { |date| Date.strptime(date, '%Y/%m/%d') }
+      filtered_events = filtered_events.events_between_dates(dates_range[0], dates_range[1])
+    end
+
+    @pagy, @events = pagy(filtered_events)
   end
 
   def set_event
