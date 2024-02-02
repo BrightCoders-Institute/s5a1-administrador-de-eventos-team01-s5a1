@@ -4,12 +4,12 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div>
-    <%= f.label :username, class: 'font-bold text-x'%><br />
+    <div><%= f.label :username, class: 'font-bold text-x'%></div>
     <%= f.text_field :username, autofocus: true, class: 'rounded mb-4' %>
   </div>
 
   <div>
-    <%= f.label :email, class: 'font-bold text-x'%><br />
+    <div><%= f.label :email, class: 'font-bold text-x'%></div>
     <%= f.email_field :email, autofocus: true, class: 'rounded mb-4', autocomplete: "email" %>
   </div>
 
@@ -18,25 +18,27 @@
   <% end %>
 
   <div class='mb-4'>
-    <span class='font-bold text-x'>
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    </span>
-    <%= f.password_field :password, class: 'rounded', autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <div class='font-bold text-x'>
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+    </div>
+    
+    <div>
+      <div><%= f.password_field :password, class: 'rounded', autocomplete: "new-password" %></div>
+      <% if @minimum_password_length %>
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
   </div>
 
   <div>
-    <%= f.label :password_confirmation, class: 'font-bold text-x' %><br />
+    <div><%= f.label :password_confirmation, class: 'font-bold text-x' %></div>
     <%= f.password_field :password_confirmation, class: 'rounded mb-4', autocomplete: "new-password" %>
   </div>
 
   <div>
-    <span class='font-bold text-x'>
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    </span>
+    <div class='font-bold text-x'>
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    </div>
     <%= f.password_field :current_password, class: 'rounded mb-6', autocomplete: "current-password" %>
   </div>
 
