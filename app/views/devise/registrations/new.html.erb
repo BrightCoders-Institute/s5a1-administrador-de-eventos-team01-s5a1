@@ -9,32 +9,35 @@
       <%= render "devise/shared/error_messages", resource: resource%>
 
       <div>
-        <%= f.label :email, class: 'font-bold text-x'%><br />
+        <div><%= f.label :username, class: 'font-bold text-x'%></div>
+        <%= f.text_field :username, autofocus: true, class: 'rounded mb-4' %>
+      </div>
+
+      <div>
+        <div><%= f.label :email, class: 'font-bold text-x'%></div>
         <%= f.email_field :email, autofocus: true, class: 'rounded mb-4',  autocomplete: "email" %>
       </div>
 
       <div>
-        <%= f.label :password, class: 'font-bold text-x' %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
+        <div>
+          <%= f.label :password, class: 'font-bold text-x' %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> chars minimum)</em>
+          <% end %>
+        </div>
         <%= f.password_field :password, autocomplete: "new-password", class: 'rounded mb-4' %>
       </div>
 
       <div>
-        <%= f.label :password_confirmation, class: 'font-bold text-x' %><br />
+        <div><%= f.label :password_confirmation, class: 'font-bold text-x' %></div>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'rounded mb-4' %>
       </div>
 
       <%= render "devise/shared/links" %>
 
-      <div class="actions">
-        <%= f.submit "Sign up", class: 'btn_log'%>
+      <div class="actions mt-3">
+        <%= f.submit "Sign up", class: 'btn_log' %>
       </div>
-
-        
     </div>
   </div>
 <% end %>
-
-
