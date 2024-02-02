@@ -9,6 +9,11 @@
       <%= render "devise/shared/error_messages", resource: resource%>
 
       <div>
+        <%= f.label :username, class: 'font-bold text-x'%><br />
+        <%= f.text_field :username, autofocus: true, class: 'rounded mb-4' %>
+      </div>
+
+      <div>
         <%= f.label :email, class: 'font-bold text-x'%><br />
         <%= f.email_field :email, autofocus: true, class: 'rounded mb-4',  autocomplete: "email" %>
       </div>
@@ -16,7 +21,7 @@
       <div>
         <%= f.label :password, class: 'font-bold text-x' %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password", class: 'rounded mb-4' %>
       </div>

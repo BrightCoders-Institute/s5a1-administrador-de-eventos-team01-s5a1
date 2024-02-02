@@ -18,4 +18,8 @@ class Event < ApplicationRecord
     image_blob = image.blob
     image.attached? && image_blob.present? && image_blob.persisted?
   end
+
+  def self.users_visible_events(author_id)
+    Event.where(user_id: author_id).or(Event.where(public: true))
+  end
 end
