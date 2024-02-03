@@ -12,10 +12,14 @@ class Event < ApplicationRecord
   validates :date, presence: true
   validates :location, presence: true
   validates :price, presence: true
+  validates_inclusion_of :public, in: [true, false]
   validates :image, size: { less_than: 10.megabytes }, content_type: ['image/jpg', 'image/png', 'image/jpeg']
 
-  scope :all_user_events, ->(author_id) {
-    where("user_id = ?", author_id).or(where(public: true)).order(date: :desc, updated_at: :desc)
+  scope :all_user_events, lambda { |author_id|
+    where('user_id = ?', author_id).or(where(public: true)).order(date: :desc, updated_at: :desc)
+  }
+  scope :all_private_user_events_between_dates, lambda { |author_id, start_date, end_date|
+    all_user_events(author_id).only_private_events.events_between_dates(start_date, end_date)
   }
   scope :only_private_events, -> { where(public: false) }
   scope :events_between_dates, ->(start_date, end_date) { where(date: start_date..end_date) }

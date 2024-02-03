@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -74,5 +72,3 @@ RSpec.describe Event, type: :model do
     @event[attribute] = new_value
   end
 end
-
-# rubocop:enable Metrics/BlockLength
