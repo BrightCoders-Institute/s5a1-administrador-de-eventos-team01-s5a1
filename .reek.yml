@@ -5,6 +5,10 @@ detectors:
   FeatureEnvy:
     exclude:
       - "EventsController#save_previous_generated_errors"
+  TooManyMethods:
+    max_methods: 16
+  TooManyStatements:
+    max_statements: 6
 
 directories:
   "app/controllers":
@@ -15,8 +19,7 @@ directories:
   "app/helpers":
     UtilityFunction:
       enabled: false
-
 exclude_paths:
-  - "db/migrate"
-  - "db/schema.rb"
-  - "config/application.rb"
+  - "bin"
+  - "config"
+  - "db"
