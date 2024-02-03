@@ -19,7 +19,7 @@ directories:
   "app/helpers":
     UtilityFunction:
       enabled: false
-      
+
 exclude_paths:
   - "bin"
   - "config"
