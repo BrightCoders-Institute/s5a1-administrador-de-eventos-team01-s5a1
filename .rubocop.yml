@@ -1,2 +1,11 @@
 Style/Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context']
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
