@@ -1,8 +1,32 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: FirstEvent
-  description: MyText
-  location: MyString
-  price: 1.5
-  date: 2024-01-23 19:52:29
+<% 2.times do |number| %>
+  first_user_event<%= number + 1 %>:
+    title: BrightEvent no. <%= number + 1 %>
+    description: Test event
+    date: <%= Time.current + (number + 1).days %>
+    location: Test location
+    price: 10
+    public: false
+    user: first_user
+
+  second_user_event<%= number + 1 %>:
+    title: Event no. <%= number + 1 %>
+    description: Test event
+    date: <%= Time.current + (number + 1).days %>
+    location: Test location
+    price: 10
+    public: false
+    user: second_user
+<% end %>
+
+<% 10.times do |number| %>
+  first_user_public_event<%= number + 1 %>:
+    title: Public BrightEvent no. <%= number + 1 %>
+    description: Test event
+    date: <%= Time.current + (number + 1).days %>
+    location: Test location
+    price: 10
+    public: true
+    user: first_user
+<% end %>
