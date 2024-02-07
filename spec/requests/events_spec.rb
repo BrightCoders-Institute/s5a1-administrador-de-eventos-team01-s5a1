@@ -1,35 +1,31 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require './spec/helpers/event_helpers'
 
 RSpec.describe 'Events', type: :request do
+  include EventHelpers
+  fixtures :events
+
   before do
-    @event = Event.where(title: 'FirstEvent').first
+    @event = events(:first_user_event1)
   end
 
   describe 'EventsController GET index' do
     it 'responds successfully' do
-      get events_path
-      expect(response).to be_successful
+      test_get_request(events_path)
     end
   end
 
   describe 'EventsController GET show' do
-    it 'responds successfully with valid ID' do
-      get event_path(@event)
-      expect(response).to be_successful
-    end
-
-    it 'responds with error when invalid ID' do
-      get event_path('Invalid')
-      expect(response).to_not be_successful
+    it 'responds successfully with valid ID and responds with error when invalid ID' do
+      test_get_requests_scenarios(event_path(@event), event_path('Invalid'))
     end
   end
 
   describe 'EventsController GET new' do
     it 'responds successfully' do
-      get new_event_path
-      expect(response).to be_successful
+      test_get_request(new_event_path)
     end
   end
 
@@ -58,14 +54,8 @@ RSpec.describe 'Events', type: :request do
   end
 
   describe 'EventsController GET edit' do
-    it 'responds successfully with valid ID' do
-      get edit_event_path(@event)
-      expect(response).to be_successful
-    end
-
-    it 'responds with error when invalid ID' do
-      get edit_event_path('Invalid')
-      expect(response).to_not be_successful
+    it 'responds successfully with valid ID and responds with error when invalid ID' do
+      test_get_requests_scenarios(edit_event_path(@event), edit_event_path('Invalid'))
     end
   end
 
@@ -94,14 +84,14 @@ RSpec.describe 'Events', type: :request do
   end
 
   describe 'EventsController DELETE destroy' do
-    it 'responds successfully with valid ID' do
-      delete event_path(@event)
-      expect(response).to have_http_status(302)
+    it 'responds successfully with valid ID and responds with error when invalid ID' do
+      test_delete_requests_scenarios(event_path(@event), event_path('Invalid'))
     end
+  end
 
-    it 'responds with error when invalid ID' do
-      delete event_path('Invalid')
-      expect(response).to_not be_successful
+  describe 'EventsController DELETE purge_image' do
+    it 'responds successfully with valid ID' do
+      test_delete_request(purge_image_event_path(@event))
     end
   end
 end
