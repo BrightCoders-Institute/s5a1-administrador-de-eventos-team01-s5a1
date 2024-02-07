@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    filter_events_list
+    @pagy, @events = pagy(filter_events_list)
   rescue Pagy::VariableError
     redirect_to events_path(page: 1)
   end
@@ -53,13 +53,10 @@ class EventsController < ApplicationController
   end
 
   def export_events
-    filter_events_list
-
     respond_to do |format|
-      format.csv { send_data Event.to_csv(@events), filename: "EVENTS-#{Date.today}.csv" }
+      format.csv { send_data Event.to_csv(filter_events_list), filename: "EVENTS-#{Date.today}.csv" }
     end
   end
-
 
   private
 
@@ -86,8 +83,7 @@ class EventsController < ApplicationController
       dates_range = params[:dates_range].split(' - ').map { |date| Date.strptime(date, '%Y/%m/%d') }
       filtered_events = filtered_events.events_between_dates(dates_range[0], dates_range[1])
     end
-
-    @pagy, @events = pagy(filtered_events)
+    filtered_events
   end
 
   def set_event
@@ -104,9 +100,4 @@ class EventsController < ApplicationController
     params.require(:event).permit(:title, :description, :date, :location,
                                   :price, :public, :image, :delete_image, :user_id)
   end
-  #     def export_csv(records)
-  #       events_csv = Event.to_csv(records)
-  #
-  #       send_data events_csv, filename: "events_export_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv"
-  #     end
 end

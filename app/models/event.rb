@@ -25,18 +25,6 @@ class Event < ApplicationRecord
     image.attached? && image_blob.present? && image_blob.persisted?
   end
 
-  #  def self.to_csv(records)
-  #    attributes = Event.attribute_names
-
-  #    CSV.generate(headers: true) do |csv|
-  #      csv << attributes
-
-  #      Array(records).each do |event|
-  #        csv << attributes.map { |attr| event.send(attr) }
-  #      end
-  #    end
-  #  end
-
   def self.to_csv(records)
     CSV.generate(headers: true) do |csv|
       csv << %w[id title description location price date]
@@ -46,14 +34,4 @@ class Event < ApplicationRecord
       end
     end
   end
-
-  # def self.to_csv
-  #  CSV.generate(headers: true) do |csv|
-  #    csv << %w[id title description location price date] # Agrega las columnas que deseas exportar
-  #
-  #    all.each do |event|
-  #      csv << attributes.map { |attr| event.send(attr) } # Ajusta las columnas según tu modelo
-  #    end
-  #  end
-  # end
 end
