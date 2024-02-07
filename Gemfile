@@ -82,9 +82,9 @@ gem 'rubycritic', '~> 0.0.16'
 
 gem 'rubocop-rails', '~> 2.23'
 
-gem "pagy", "~> 6.4"
+gem 'pagy', '~> 6.4'
 
-gem "active_storage_validations", "~> 1.1"
+gem 'active_storage_validations', '~> 1.1'
 
 gem 'ruby-vips', '~> 2.2'
 
