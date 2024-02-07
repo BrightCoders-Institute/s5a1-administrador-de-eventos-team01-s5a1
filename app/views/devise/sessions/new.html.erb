@@ -1,21 +1,20 @@
-<div class="flex items-center justify-center" >
-  <h2 class="text-red">Log in</h2>
-</div>
+<div class="flex items-center justify-center">
+  <div class= "shadow-md rounded-md w-96 p-5">
+    <div class="flex justify-center">
+      <h2 class="mt-0">Log in</h2>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="flex items-center justify-center">  
-    <div class="flex flex-col items-center">
-      
-      <div>
-        <div><%= f.label :email ,class: 'font-bold text-x'%></div>
-        <%= f.email_field :email, autofocus: true, class: 'rounded mb-4' ,autocomplete: "email" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-4">
+        <%= f.label :email , class: 'font-bold text-x'%>
+        <%= f.email_field :email, autofocus: true, class: 'rounded w-full mb-4' ,autocomplete: "email" %>
       </div>
-
-      <div>
-        <div><%= f.label :password ,class: 'font-bold text-x' %></div>
-        <%= f.password_field :password, class: 'rounded mb-4', autocomplete: "current-password" %>
+        
+      <div class="mb-4 text-left">
+        <%= f.label :password ,class: 'font-bold text-x mb-2' %>
+        <%= f.password_field :password, class: 'rounded w-full mb-4', autocomplete: "current-password" %>
       </div>
-
+    
       <% if devise_mapping.rememberable? %>
         <div class="flex items-center mb-4">
           <%= f.check_box :remember_me %>
@@ -23,11 +22,10 @@
         </div>
       <% end %>
 
-      <%= render "devise/shared/links" %>
-
-      <div class="mt-6">
+      <div class="flex items-center justify-center flex-col actions">
+        <%= render "devise/shared/links" %>
         <%= f.submit "Log in" , class: 'btn_log' %>
       </div>
-    </div>
+    <% end %>
   </div>
-<% end %>
+</div>

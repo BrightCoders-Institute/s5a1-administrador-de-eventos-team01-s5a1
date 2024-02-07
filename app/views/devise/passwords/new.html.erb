@@ -1,21 +1,25 @@
-<div class="flex items-center justify-center" >
-  <h2>Forgot your password?</h2>
-</div>
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <div class="flex items-center justify-center">  
-    <div class="flex flex-col items-center">  
-      <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div>
-        <div><%= f.label :email, class: 'font-bold text-x' %></div>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'rounded mb-4' %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Send me reset password instructions",class: 'btn_log mb-5' %>
-      </div>
-
-      <%= render "devise/shared/links" %>
+<div class="flex items-center justify-center">
+  <div class= "shadow-md rounded-md w-96 p-5">
+    <div class="flex justify-center">
+      <h2 class="mt-0">Forgot your password?</h2>
     </div>
+    
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="flex items-center justify-center">  
+        <div class="flex flex-col items-center">  
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div>
+            <div><%= f.label :email, class: 'font-bold text-x' %></div>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'rounded w-full mb-4' %>
+          </div>
+
+          <div class="flex items-center justify-center flex-col actions">
+            <%= render "devise/shared/links" %>
+            <%= f.submit "Send me reset password instructions",class: 'btn_log mb-5' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

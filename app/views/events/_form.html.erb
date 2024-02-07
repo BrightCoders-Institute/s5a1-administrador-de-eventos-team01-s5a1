@@ -1,6 +1,7 @@
+
 <%= form_with model: event do |form| %> 
   <% if form.object.errors.any? %>
-    <div class="mb-4">
+    <div class="mb-2">
       <% form.object.errors.full_messages.each do |message| %>
         <div><%= message %></div>
       <% end %>
@@ -9,22 +10,22 @@
 
   <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <div class="mb-4">
+  <div class="mb-2">
     <%= form.label :title, 'Title', class: 'block b' %>
     <%= form.text_field :title, class: 'field'%>
   </div>
 
-  <div class="mb-4">
+  <div>
     <%= form.label :description, 'Description', class: 'block b' %>
     <%= form.text_area :description, class: 'field' %> 
   </div>
 
-  <div class="mb-4">
+  <div class="mb-2">
     <%= form.label :date, 'Date', class: 'block b' %>
     <%= form.date_field :date, class: 'field' %>
   </div>
 
-  <div class="mb-4">
+  <div class="mb-2">
     <%= form.label :location, 'Location', class: 'block b' %>
     <%= form.text_field :location, class: 'field' %> 
   </div>
@@ -34,12 +35,12 @@
     <%= form.number_field :price, step: 0.01, class: 'field' %>
   </div>
 
-  <div class="mb-4 flex items-center">
+  <div class="mb-2 flex items-center">
     <%= form.check_box :public %>
     <%= form.label :public, 'This event is public?', class: 'ml-1 font-semibold' %>
   </div>
 
-  <div class="mb-4">
+  <div class="mb-2">
     <%= form.label :image, 'Image', class: 'block b' %>
     <%= image_file_field form %>
 
