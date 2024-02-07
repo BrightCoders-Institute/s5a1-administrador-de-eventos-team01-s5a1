@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update purge_image destroy]
   before_action :authenticate_user!
@@ -50,6 +52,15 @@ class EventsController < ApplicationController
     redirect_to root_path
   end
 
+  def export_events
+    filter_events_list
+
+    respond_to do |format|
+      format.csv { send_data Event.to_csv(@events), filename: "EVENTS-#{Date.today}.csv" }
+    end
+  end
+
+
   private
 
   def reattach_image(previous_attachment_blob)
@@ -69,9 +80,7 @@ class EventsController < ApplicationController
   def filter_events_list
     filtered_events = Event.all_user_events(current_user.id)
 
-    if params[:privates].present? && params[:privates]
-      filtered_events = filtered_events.only_private_events
-    end
+    filtered_events = filtered_events.only_private_events if params[:privates].present? && params[:privates]
 
     if params[:dates_range].present? && params[:date_filter].present? && params[:date_filter]
       dates_range = params[:dates_range].split(' - ').map { |date| Date.strptime(date, '%Y/%m/%d') }
@@ -95,4 +104,9 @@ class EventsController < ApplicationController
     params.require(:event).permit(:title, :description, :date, :location,
                                   :price, :public, :image, :delete_image, :user_id)
   end
+  #     def export_csv(records)
+  #       events_csv = Event.to_csv(records)
+  #
+  #       send_data events_csv, filename: "events_export_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv"
+  #     end
 end
