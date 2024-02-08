@@ -4,6 +4,18 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: "apikey",
+    password: Rails.application.credentials.sendgrid_api_key,
+    domain: "outlook.com",
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development

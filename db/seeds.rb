@@ -11,10 +11,10 @@
 #   end
 
 first_user = User.where(username: 'BrightUser').first_or_initialize
-first_user.update(email: 'brightuser@gmail.com', password: '123123', password_confirmation: '123123')
+first_user.update(email: 'brighteventsexample@outlook.com', password: '123123', password_confirmation: '123123')
 
 second_user = User.where(username: 'SecondUser').first_or_initialize
-second_user.update(email: 'email@gmail.com', password: '123123', password_confirmation: '123123')
+second_user.update(email: 'erikgomez198755@outlook.com', password: '123123', password_confirmation: '123123')
 
 2.times do |number|
   event = first_user.events.where(title: "BrightEvent no. #{number + 1}").first_or_initialize
