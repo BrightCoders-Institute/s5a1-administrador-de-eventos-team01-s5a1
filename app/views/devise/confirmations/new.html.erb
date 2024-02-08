@@ -1,20 +1,20 @@
 <div class="flex items-center justify-center">
   <div class= "shadow-md rounded-md w-96 p-5">
     <div class="flex justify-center">
-      <h2>Resend confirmation instructions</h2>
+      <h2 class="mt-0 text-center">Resend confirmation instructions</h2>
     </div>
 
       <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div>
+        <div class="mb-4">
           <%= f.label :email, class:'font-bold text-x' %>
           <%= f.email_field :email,class: 'rounded w-full mb-4', autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
         </div>
 
         <div class="flex items-center justify-center flex-col actions">
           <%= render "devise/shared/links" %>
-          <%= f.submit "Resend confirmation instructions", class: 'btn_log mb-5' %>
+          <%= f.submit "Resend confirmation instructions", class: 'btn_log mt-3' %>
         </div>
       <% end %> 
   </div>
