@@ -1,0 +1,10 @@
+Hello, <%= @event.user.username %>!
+
+We are sending you this email in order to remind you about this event:
+
+Title: <%= @event.title %>
+Description: <%= @event.description %>
+Date: <%= @event.date %>
+Location: <%= @event.location %>
+
+<%= link_to 'Show event details', @event %>

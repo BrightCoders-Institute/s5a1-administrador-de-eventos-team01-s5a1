@@ -7,6 +7,7 @@
   <% @events.each_with_index do |event, index| %>
     <div class="mt-10">
       <h2 class="mt-0 mb-3"><%= event.title.capitalize %></h2>
+      <h4 class="font-bold mb-2">By <%= event.user.username %></h4>
       <h4 class="font-bold mb-5">Planned for <%= event.date %></h4>
 
       <%= preview_event_image event if event.image_is_saved_and_exists? %>

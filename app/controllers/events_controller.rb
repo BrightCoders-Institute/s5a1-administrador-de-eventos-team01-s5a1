@@ -20,6 +20,9 @@ class EventsController < ApplicationController
     @event = Event.new(events_params)
 
     if @event.save
+      if @event.schedule_event?
+        EventReminderJob.set(wait_until: @event.notification_datetime).perform_later(@event.id, @event.updated_at)
+      end
       redirect_to @event
     else
       render :new, status: :unprocessable_entity
@@ -29,13 +32,16 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
-    previous_image_exists = @event.image_is_saved_and_exists?
-    previous_attachment_blob = @event.image.blob if previous_image_exists
+    previous_event = @event
+    previous_notification_datetime = previous_event.notification_datetime
 
     if @event.update(events_params)
+      if @event.schedule_event?(previous_notification_datetime)
+        EventReminderJob.set(wait_until: @event.notification_datetime).perform_later(@event.id, @event.updated_at)
+      end
       redirect_to @event
     else
-      reattach_image(previous_attachment_blob) if previous_image_exists
+      reattach_image(previous_event.image.blob) if previous_event.image_is_saved_and_exists?
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,7 +53,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to root_path
+    redirect_to events_path
   end
 
   private
@@ -92,7 +98,7 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.require(:event).permit(:title, :description, :date, :location,
+    params.require(:event).permit(:title, :description, :date, :notification_datetime, :location,
                                   :price, :public, :image, :delete_image, :user_id)
   end
 end

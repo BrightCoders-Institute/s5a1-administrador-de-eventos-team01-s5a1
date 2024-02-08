@@ -22,7 +22,12 @@
 
   <div class="mb-2">
     <%= form.label :date, 'Date', class: 'block b' %>
-    <%= form.date_field :date, class: 'field' %>
+    <%= form.text_field :date, data: {controller: "datepicker"}, class: 'field' %>
+  </div>
+
+  <div class="mb-2">
+    <%= form.label :notification_datetime, 'Notification date', class: 'block b' %>
+    <%= form.text_field :notification_datetime, data: {controller: "datetimepicker"}, class: 'field' %>
   </div>
 
   <div class="mb-2">

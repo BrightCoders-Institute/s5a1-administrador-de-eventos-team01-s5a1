@@ -1,0 +1,10 @@
+<p>Hello, <b><%= @event.user.username %></b>!</p>
+
+<p>We are sending you this email in order to remind you about this event:</p>
+
+<p><b>Title:</b> <%= @event.title %></p>
+<p><b>Description:</b> <%= @event.description %></p>
+<p><b>Date:</b> <%= @event.date %></p>
+<p><b>Location:</b> <%= @event.location %></p>
+
+<p><%= link_to 'Check event', @event %></p>
