@@ -25,12 +25,17 @@ class Event < ApplicationRecord
     image.attached? && image_blob.present? && image_blob.persisted?
   end
 
+  def public_to_string
+    public ? "Yes" : "No"
+  end
+
   def self.to_csv(records)
     CSV.generate(headers: true) do |csv|
-      csv << %w[id title description location price date]
+      csv << %w[id author title description location price date public]
 
       Array(records).each do |event|
-        csv << [event.id, event.title, event.description, event.location, event.price, event.date]
+        csv << [event.id, event.user.username, event.title, event.description,
+                event.location, event.price, event.date, event.public_to_string]
       end
     end
   end

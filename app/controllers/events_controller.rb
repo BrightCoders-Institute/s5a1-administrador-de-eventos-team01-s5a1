@@ -54,7 +54,8 @@ class EventsController < ApplicationController
 
   def export_events
     respond_to do |format|
-      format.csv { send_data Event.to_csv(filter_events_list), filename: "EVENTS-#{Date.today}.csv" }
+      format.csv { send_data Event.to_csv(filter_events_list),
+                             filename: "BrightCodersEvents_#{Time.now.strftime("%Y%m%d_%H%M%S.")}.csv" }
     end
   end
 
@@ -76,7 +77,6 @@ class EventsController < ApplicationController
 
   def filter_events_list
     filtered_events = Event.all_user_events(current_user.id)
-
     filtered_events = filtered_events.only_private_events if params[:privates].present? && params[:privates]
 
     if params[:dates_range].present? && params[:date_filter].present? && params[:date_filter]
