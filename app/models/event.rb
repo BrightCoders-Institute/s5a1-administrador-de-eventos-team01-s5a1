@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class Event < ApplicationRecord
   belongs_to :user
 
@@ -20,6 +22,9 @@ class Event < ApplicationRecord
   scope :all_user_events, lambda { |author_id|
     where('user_id = ?', author_id).or(where(public: true)).order(date: :desc, updated_at: :desc)
   }
+  scope :all_private_user_events_between_dates, lambda { |author_id, start_date, end_date|
+    all_user_events(author_id).events_between_dates(start_date, end_date).only_private_events
+  }
   scope :only_private_events, -> { where(public: false) }
   scope :events_between_dates, ->(start_date, end_date) { where(date: start_date..end_date) }
 
@@ -37,7 +42,10 @@ class Event < ApplicationRecord
   end
 
   def schedule_event?(previous_notification_datetime = nil)
-    Time.current < notification_datetime && notification_datetime != previous_notification_datetime
+    previous_datetime = previous_notification_datetime.nil? ? previous_notification_datetime :
+                                                              previous_notification_datetime.beginning_of_minute
+
+    Time.current < notification_datetime && notification_datetime.beginning_of_minute != previous_datetime
   end
 
   def self.to_csv(records)
@@ -55,6 +63,8 @@ class Event < ApplicationRecord
   private
 
   def notification_datetime_is_lower_or_equal_than_date
+    return if date.nil? || notification_datetime.nil?
+
     unless date.in_time_zone.to_datetime.end_of_day >= notification_datetime
       errors.add(:notification_datetime, "must be less than or equal to #{date}")
     end

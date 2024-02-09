@@ -46,7 +46,7 @@
       </div>
 
       <div class="flex items-center justify-center flex-col actions">
-        <%= button_to "Cancel my account?", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: 'underline mb-4 hover:text-red-600' %>
+        <%= link_to "Cancel my account?", registration_path(resource_name), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, method: :delete, class: 'underline mb-4 hover:text-red-600' %>
         <%= f.submit "Update", class: 'btn_log mt-1' %>
       </div>
     <% end %>

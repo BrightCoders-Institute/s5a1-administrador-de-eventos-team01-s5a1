@@ -94,4 +94,10 @@ RSpec.describe 'Events', type: :request do
       test_delete_request(purge_image_event_path(@event))
     end
   end
+
+  describe 'EventsController GET export_events' do
+    it 'responds successfully' do
+      test_get_request(export_events_events_path)
+    end
+  end
 end
