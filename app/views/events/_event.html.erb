@@ -3,9 +3,9 @@
   <div class="text-lg"><span class="font-bold">Title:</span> <%= event.title %></div>
   <div class="text-lg"><span class="font-bold">Description:</span> <%= event.description %></div>
   <div class="text-lg"><span class="font-bold">Date:</span> <%= event.date %></div>
-  <div class="text-lg"><span class="font-bold">Notification time:</span> <%= event.notification_datetime.strftime("%Y-%m-%d %H:%M:%S") %></div>
+  <div class="text-lg"><span class="font-bold">Notification time:</span> <%= event.format_notification_datetime %></div>
   <div class="text-lg"><span class="font-bold">Location:</span> <%= event.location %></div>
   <div class="text-lg"><span class="font-bold">Price: </span> <%= event.price %></div>
-  <div class="text-lg"><span class="font-bold">Public?:</span> <%= event.public ? 'Yes' : 'No' %></div>
+  <div class="text-lg"><span class="font-bold">Public?:</span> <%= event.public_to_string %></div>
   <%= event_image event if event.image_is_saved_and_exists? %>
 </div>
