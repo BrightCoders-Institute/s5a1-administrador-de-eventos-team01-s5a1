@@ -60,8 +60,10 @@ class EventsController < ApplicationController
 
   def export_events
     respond_to do |format|
-      format.csv { send_data Event.to_csv(filter_events_list),
-                             filename: "BrightCodersEvents_#{Time.now.strftime("%Y%m%d_%H%M%S.")}.csv" }
+      format.csv do
+        send_data Event.to_csv(filter_events_list),
+                  filename: "BrightCodersEvents_#{Time.now.strftime('%Y%m%d_%H%M%S.')}.csv"
+      end
     end
   end
 
@@ -83,13 +85,24 @@ class EventsController < ApplicationController
 
   def filter_events_list
     filtered_events = Event.all_user_events(current_user.id)
-    filtered_events = filtered_events.only_private_events if params[:privates].present? && params[:privates]
+    filtered_events = filter_private_events(filtered_events)
+    filter_events_by_dates_range(filtered_events)
+  end
 
-    if params[:dates_range].present? && params[:date_filter].present? && params[:date_filter]
-      dates_range = params[:dates_range].split(' - ').map { |date| Date.strptime(date, '%Y/%m/%d') }
-      filtered_events = filtered_events.events_between_dates(dates_range[0], dates_range[1])
-    end
-    filtered_events
+  def filter_private_events(events)
+    privates_param = params[:privates]
+    return events unless privates_param.present? && privates_param
+
+    events.only_private_events
+  end
+
+  def filter_events_by_dates_range(events)
+    date_filter_param = params[:date_filter]
+    dates_range_param = params[:dates_range]
+    return events unless dates_range_param.present? && date_filter_param.present? && date_filter_param
+
+    dates_range = dates_range_param.split(' - ').map { |date| Date.strptime(date, '%Y/%m/%d') }
+    events.events_between_dates(dates_range[0], dates_range[1])
   end
 
   def set_event

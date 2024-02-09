@@ -5,8 +5,14 @@ detectors:
   FeatureEnvy:
     exclude:
       - "EventsController#save_previous_generated_errors"
+  NestedIterators:
+    exclude:
+      - "Event#self.to_csv"
+  ControlParameter:
+    exclude:
+      - "EventReminderJob#perform"
   TooManyMethods:
-    max_methods: 16
+    max_methods: 17
   TooManyStatements:
     max_statements: 6
 
@@ -15,6 +21,14 @@ directories:
     InstanceVariableAssumption:
       enabled: false
     NestedIterators:
+      enabled: false
+  "app/mailers":
+    InstanceVariableAssumption:
+      enabled: false
+    NestedIterators:
+      enabled: false
+  "app/jobs":
+    UtilityFunction:
       enabled: false
   "app/helpers":
     UtilityFunction:

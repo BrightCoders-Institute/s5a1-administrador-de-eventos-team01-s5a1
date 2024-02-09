@@ -4,6 +4,9 @@ Style/Documentation:
 Metrics/BlockLength:
   AllowedMethods: ['describe', 'context']
 
+Metrics/MethodLength:
+  Max: 11
+
 AllCops:
   Exclude:
     - 'bin/**/*'
