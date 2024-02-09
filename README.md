@@ -93,7 +93,9 @@ entorno con la contraseña y nombre de usuario de postgresql.
 >$ sidekiq
 >```
 >
->_**11.** Ejecutar el proyecto._
+>_**11.** Crear un archivo llamado master.key en el directorio config y copiar en él la correpondiente llave (pedírsela al equipo en caso de no tenerla)._
+>
+>_**12.** Ejecutar el proyecto._
 >```bash
 >$ rails server # Si no se desean recompilar estilos CSS.
 >$ bin/dev # Para recompilar los estilos de Tailwind CSS.
@@ -133,4 +135,4 @@ Esta obra está bajo una
 
 [cc-by-nc-sa]: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
-[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg``
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
