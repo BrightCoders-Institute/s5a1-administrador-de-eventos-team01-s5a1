@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     member do
       delete :purge_image
     end
+
+    collection do
+      get :export_events
+    end
   end
 end

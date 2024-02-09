@@ -4,6 +4,6 @@
   <div><span class="font-bold	text-lg">Date:</span> <%= event.date %></div>
   <div><span class="font-bold	text-lg">Location:</span> <%= event.location %></div>
   <div><span class="font-bold	text-lg">Price: </span> $<%= event.price %></div>
-  <div><span class="font-bold	text-lg">Public?:</span> <%= event.public ? 'Yes' : 'No' %></div>
+  <div><span class="font-bold	text-lg">Public?:</span> <%= event.public_to_string %></div>
   <%= event_image event if event.image_is_saved_and_exists? %>
 </div>

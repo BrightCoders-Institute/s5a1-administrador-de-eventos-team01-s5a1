@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update purge_image destroy]
   before_action :authenticate_user!
 
   def index
-    filter_events_list
+    @pagy, @events = pagy(filter_events_list)
   rescue Pagy::VariableError
     redirect_to events_path(page: 1)
   end
@@ -50,6 +52,13 @@ class EventsController < ApplicationController
     redirect_to root_path
   end
 
+  def export_events
+    respond_to do |format|
+      format.csv { send_data Event.to_csv(filter_events_list),
+                             filename: "BrightCodersEvents_#{Time.now.strftime("%Y%m%d_%H%M%S.")}.csv" }
+    end
+  end
+
   private
 
   def reattach_image(previous_attachment_blob)
@@ -68,17 +77,13 @@ class EventsController < ApplicationController
 
   def filter_events_list
     filtered_events = Event.all_user_events(current_user.id)
-
-    if params[:privates].present? && params[:privates]
-      filtered_events = filtered_events.only_private_events
-    end
+    filtered_events = filtered_events.only_private_events if params[:privates].present? && params[:privates]
 
     if params[:dates_range].present? && params[:date_filter].present? && params[:date_filter]
       dates_range = params[:dates_range].split(' - ').map { |date| Date.strptime(date, '%Y/%m/%d') }
       filtered_events = filtered_events.events_between_dates(dates_range[0], dates_range[1])
     end
-
-    @pagy, @events = pagy(filtered_events)
+    filtered_events
   end
 
   def set_event
