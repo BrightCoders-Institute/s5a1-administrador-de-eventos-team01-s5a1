@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update purge_image destroy]
   before_action :authenticate_user!
 
   def index
-    filter_events_list
+    @pagy, @events = pagy(filter_events_list)
   rescue Pagy::VariableError
     redirect_to events_path(page: 1)
   end
@@ -20,6 +22,9 @@ class EventsController < ApplicationController
     @event = Event.new(events_params)
 
     if @event.save
+      if @event.schedule_event?
+        EventReminderJob.set(wait_until: @event.notification_datetime).perform_later(@event.id, @event.updated_at)
+      end
       redirect_to @event
     else
       render :new, status: :unprocessable_entity
@@ -29,13 +34,16 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
-    previous_image_exists = @event.image_is_saved_and_exists?
-    previous_attachment_blob = @event.image.blob if previous_image_exists
+    previous_event = @event
+    previous_notification_datetime = previous_event.notification_datetime
 
     if @event.update(events_params)
+      if @event.schedule_event?(previous_notification_datetime)
+        EventReminderJob.set(wait_until: @event.notification_datetime).perform_later(@event.id, @event.updated_at)
+      end
       redirect_to @event
     else
-      reattach_image(previous_attachment_blob) if previous_image_exists
+      reattach_image(previous_event.image.blob) if previous_event.image_is_saved_and_exists?
       render :edit, status: :unprocessable_entity
     end
   end
@@ -47,7 +55,16 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to root_path
+    redirect_to events_path
+  end
+
+  def export_events
+    respond_to do |format|
+      format.csv do
+        send_data Event.to_csv(filter_events_list),
+                  filename: "BrightCodersEvents_#{Time.now.strftime('%Y%m%d_%H%M%S.')}.csv"
+      end
+    end
   end
 
   private
@@ -69,9 +86,7 @@ class EventsController < ApplicationController
   def filter_events_list
     filtered_events = Event.all_user_events(current_user.id)
     filtered_events = filter_private_events(filtered_events)
-    filtered_events = filter_events_by_dates_range(filtered_events)
-
-    @pagy, @events = pagy(filtered_events)
+    filter_events_by_dates_range(filtered_events)
   end
 
   def filter_private_events(events)
@@ -101,7 +116,7 @@ class EventsController < ApplicationController
   end
 
   def events_params
-    params.require(:event).permit(:title, :description, :date, :location,
+    params.require(:event).permit(:title, :description, :date, :notification_datetime, :location,
                                   :price, :public, :image, :delete_image, :user_id)
   end
 end

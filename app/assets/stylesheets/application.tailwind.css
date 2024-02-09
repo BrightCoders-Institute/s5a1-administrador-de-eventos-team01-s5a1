@@ -7,10 +7,13 @@
     @apply bg-blue-400 hover:bg-blue-500 text-black font-bold mb-4 mt-5 px-4 rounded-xl;
   }
   .btn-2 {
-    @apply bg-green-400 hover:bg-green-500 text-black font-bold  mb-5 px-4 rounded-xl;
+    @apply bg-green-400 hover:bg-green-500 text-black font-bold mb-5 px-4 rounded-xl;
   }
   .btn-3 {
     @apply bg-red-400 hover:bg-red-500 text-black font-bold px-4 rounded-xl;
+  }
+  .btn-4 {
+    @apply bg-cyan-400 hover:bg-cyan-500 text-black font-bold px-4 rounded-xl no-underline;
   }
   .btn_log {
     @apply  bg-black active:bg-slate-800 text-white font-bold py-1 px-8 rounded;
@@ -91,3 +94,4 @@
 .pagy-combo-nav-js .page.next.disabled {
   @apply text-gray-400 cursor-default;
 }
+

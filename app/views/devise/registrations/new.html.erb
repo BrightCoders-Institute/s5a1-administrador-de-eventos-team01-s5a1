@@ -1,43 +1,37 @@
-<div class="flex items-center justify-center" >
-  <h2>Sign up</h2>
-</div>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <div class="flex items-center justify-center">  
-    <div class="flex flex-col items-center">
-
-      <%= render "devise/shared/error_messages", resource: resource%>
-
-      <div>
-        <div><%= f.label :username, class: 'font-bold text-x'%></div>
-        <%= f.text_field :username, autofocus: true, class: 'rounded mb-4' %>
-      </div>
-
-      <div>
-        <div><%= f.label :email, class: 'font-bold text-x'%></div>
-        <%= f.email_field :email, autofocus: true, class: 'rounded mb-4',  autocomplete: "email" %>
-      </div>
-
-      <div>
-        <div>
-          <%= f.label :password, class: 'font-bold text-x' %>
-          <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> chars minimum)</em>
-          <% end %>
-        </div>
-        <%= f.password_field :password, autocomplete: "new-password", class: 'rounded mb-4' %>
-      </div>
-
-      <div>
-        <div><%= f.label :password_confirmation, class: 'font-bold text-x' %></div>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'rounded mb-4' %>
-      </div>
-
-      <%= render "devise/shared/links" %>
-
-      <div class="actions mt-3">
-        <%= f.submit "Sign up", class: 'btn_log' %>
-      </div>
+<div class="flex items-center justify-center">
+  <div class= "shadow-md rounded-md w-96 p-5">
+    <div class="flex justify-center">
+      <h2 class="mt-0">Sign up</h2>
     </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'w-full' }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="mb-4">
+        <%= f.label :username, class: 'block text-sm font-bold mb-1' %>
+        <%= f.text_field :username, autofocus: true, class: 'text-sm rounded w-full px-3 py-2' %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :email, class: 'block text-sm font-bold mb-1' %>
+        <%= f.email_field :email, autofocus: true, class: 'text-sm rounded w-full px-3 py-2', autocomplete: "email" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :password, class: 'block text-sm font-bold mb-1' %>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'text-sm rounded w-full px-3 py-2 mb-1' %>
+        <em class="text-sm text-gray-600">(6 characters minimum)</em>
+      </div>
+
+      <div class="mb-8">
+        <%= f.label :password_confirmation, class: 'block text-sm font-bold mb-1' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'text-sm rounded w-full px-3 py-2 border focus:outline-none focus:border-blue-500' %>
+      </div>
+
+      <div class="flex items-center justify-center flex-col actions">
+        <%= render "devise/shared/links" %>
+        <%= f.submit "Sign up", class: 'btn_log mt-3' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

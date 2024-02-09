@@ -1,5 +1,10 @@
 <h1 class="mb-6">Events lists</h1>
-<div class='mb-10'><%= link_to "Create new event", new_event_path, class: 'btn-1 py-1 no-underline' %></div>
+<div class="flex items-center mb-10">
+  <%= link_to "Download as CSV", export_events_events_path(format: :csv, dates_range: params[:dates_range],
+                                                          date_filter: params[:date_filter], privates: params[:privates]),
+                                                          class: 'btn-1 my-0 no-underline' %>
+  <div class='ml-3'><%= link_to "Create new event", new_event_path, class: 'btn-4 py-1' %></div>
+</div>
 
 <%= render "search_filter_form" %>
 
@@ -7,6 +12,7 @@
   <% @events.each_with_index do |event, index| %>
     <div class="mt-10">
       <h2 class="mt-0 mb-3"><%= event.title.capitalize %></h2>
+      <h4 class="font-bold mb-2">By <%= event.user.username %></h4>
       <h4 class="font-bold mb-5">Planned for <%= event.date %></h4>
 
       <%= preview_event_image event if event.image_is_saved_and_exists? %>
