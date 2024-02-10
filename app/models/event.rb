@@ -16,14 +16,14 @@ class Event < ApplicationRecord
   validate :notification_datetime_is_lower_or_equal_than_date
   validates :location, presence: true
   validates :price, presence: true
-  validates :public, inclusion: [true, false]
+  validates_inclusion_of :public, in: [true, false]
   validates :image, size: { less_than: 10.megabytes }, content_type: ['image/jpg', 'image/png', 'image/jpeg']
 
   scope :all_user_events, lambda { |author_id|
     where('user_id = ?', author_id).or(where(public: true)).order(date: :desc, updated_at: :desc)
   }
   scope :all_private_user_events_between_dates, lambda { |author_id, start_date, end_date|
-    all_user_events(author_id).events_between_dates(start_date, end_date).only_private_events
+    all_user_events(author_id).only_private_events.events_between_dates(start_date, end_date)
   }
   scope :only_private_events, -> { where(public: false) }
   scope :events_between_dates, ->(start_date, end_date) { where(date: start_date..end_date) }
@@ -34,11 +34,11 @@ class Event < ApplicationRecord
   end
 
   def public_to_string
-    public ? "Yes" : "No"
+    public ? 'Yes' : 'No'
   end
 
   def format_notification_datetime
-    notification_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    notification_datetime.strftime('%Y-%m-%d %H:%M:%S')
   end
 
   def schedule_event?(previous_notification_datetime = nil)
@@ -64,7 +64,7 @@ class Event < ApplicationRecord
 
   def notification_datetime_is_lower_or_equal_than_date
     return if date.nil? || notification_datetime.nil?
-
+    
     unless date.in_time_zone.to_datetime.end_of_day >= notification_datetime
       errors.add(:notification_datetime, "must be less than or equal to #{date}")
     end

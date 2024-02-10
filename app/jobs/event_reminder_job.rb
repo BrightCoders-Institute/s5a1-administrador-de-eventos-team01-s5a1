@@ -7,6 +7,6 @@ class EventReminderJob < ApplicationJob
     event = Event.find(event_id)
     return if event.updated_at != event_updated_at
 
-    EventMailer.with(event: event).event_notification.deliver_later
+    EventMailer.with(event:).event_notification.deliver_later
   end
 end
