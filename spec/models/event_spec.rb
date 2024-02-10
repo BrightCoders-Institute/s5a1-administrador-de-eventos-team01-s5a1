@@ -145,11 +145,14 @@ RSpec.describe Event, type: :model do
 
   describe 'to_csv method' do
     it 'generates a single record CSV file' do
-      expect(Array("#{described_class.to_csv(@event).split("\n")[1]}\n")).to match_array(CSV.generate_line([
+      generated_record = Array("#{described_class.to_csv(@event).split("\n")[1]}\n")
+      expected_record = [
         @event.id, @event.user.username, @event.title, @event.description,
         @event.location, @event.price, @event.date, @event.format_notification_datetime,
         @event.public_to_string
-      ]))
+      ]
+
+      expect(generated_record).to match_array(CSV.generate_line(expected_record))
     end
   end
 

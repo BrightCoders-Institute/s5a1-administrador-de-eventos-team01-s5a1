@@ -42,8 +42,11 @@ class Event < ApplicationRecord
   end
 
   def schedule_event?(previous_notification_datetime = nil)
-    previous_datetime = previous_notification_datetime.nil? ? previous_notification_datetime :
-                                                              previous_notification_datetime.beginning_of_minute
+    previous_datetime = if previous_notification_datetime.nil?
+                          previous_notification_datetime
+                        else
+                          previous_notification_datetime.beginning_of_minute
+                        end
 
     Time.current < notification_datetime && notification_datetime.beginning_of_minute != previous_datetime
   end
@@ -64,9 +67,9 @@ class Event < ApplicationRecord
 
   def notification_datetime_is_lower_or_equal_than_date
     return if date.nil? || notification_datetime.nil?
-    
-    unless date.in_time_zone.to_datetime.end_of_day >= notification_datetime
-      errors.add(:notification_datetime, "must be less than or equal to #{date}")
-    end
+
+    return if date.in_time_zone.to_datetime.end_of_day >= notification_datetime
+
+    errors.add(:notification_datetime, "must be less than or equal to #{date}")
   end
 end
