@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'csv'
+
 class Event < ApplicationRecord
   belongs_to :user
 
@@ -40,7 +42,13 @@ class Event < ApplicationRecord
   end
 
   def schedule_event?(previous_notification_datetime = nil)
-    Time.current < notification_datetime && notification_datetime != previous_notification_datetime
+    previous_datetime = if previous_notification_datetime.nil?
+                          previous_notification_datetime
+                        else
+                          previous_notification_datetime.beginning_of_minute
+                        end
+
+    Time.current < notification_datetime && notification_datetime.beginning_of_minute != previous_datetime
   end
 
   def self.to_csv(records)
@@ -58,6 +66,8 @@ class Event < ApplicationRecord
   private
 
   def notification_datetime_is_lower_or_equal_than_date
+    return if date.nil? || notification_datetime.nil?
+
     return if date.in_time_zone.to_datetime.end_of_day >= notification_datetime
 
     errors.add(:notification_datetime, "must be less than or equal to #{date}")

@@ -6,6 +6,7 @@
     description: Test event
     date: <%= Time.current + (number + 1).days %>
     location: Test location
+    notification_datetime: <%= Time.current - 1.days %>
     price: 10
     public: false
     user: first_user
@@ -14,6 +15,7 @@
     title: Event no. <%= number + 1 %>
     description: Test event
     date: <%= Time.current + (number + 1).days %>
+    notification_datetime: <%= Time.current - 1.days %>
     location: Test location
     price: 10
     public: false
@@ -25,6 +27,7 @@
     title: Public BrightEvent no. <%= number + 1 %>
     description: Test event
     date: <%= Time.current + (number + 1).days %>
+    notification_datetime: <%= Time.current - 1.days %>
     location: Test location
     price: 10
     public: true
