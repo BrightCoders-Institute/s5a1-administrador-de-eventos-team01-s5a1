@@ -13,6 +13,10 @@ module EventsHelper
     end
   end
 
+  def default_event_image(event, classes = 'mt-3 mb-4')
+    image_tag event.image, class: classes
+  end
+
   def event_image(event, classes = 'mt-3 mb-4')
     tag.div do
       image_tag event.image, size: '300x300', class: classes
