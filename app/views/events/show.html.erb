@@ -1,7 +1,7 @@
-<h1 class="mb-6">Event details</h1>
+<h1 class="mb-6 text-center">Event details</h1>
 <div>
   <%= render 'event', event: @event %>
-  <div class="flex">
+  <div class="flex mt-5">
     <% if current_user.id == @event.user.id %>
       <div class="mb-3"><%= link_to 'Edit event', edit_event_path(@event), class: 'btn-1 py-1 no-underline mr-3' %></div>
       

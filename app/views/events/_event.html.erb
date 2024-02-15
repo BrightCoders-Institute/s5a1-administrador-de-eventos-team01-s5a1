@@ -1,53 +1,47 @@
-<div class="grid grid-flow-row gap-3 mb-5">
-  <div class="text-lg"><span class="font-bold">Author:</span> <%= event.user.username %></div>
-  <div class="text-lg"><span class="font-bold">Title:</span> <%= event.title %></div>
-  <div class="text-lg"><span class="font-bold">Description:</span> <%= event.description %></div>
-  <div class="text-lg"><span class="font-bold">Date:</span> <%= event.date %></div>
-  <div class="text-lg"><span class="font-bold">Notification time:</span> <%= event.format_notification_datetime %></div>
-  <div class="text-lg"><span class="font-bold">Location:</span> <%= event.location %></div>
-  <div class="text-lg"><span class="font-bold">Price: </span> <%= event.price %></div>
-  <div class="text-lg"><span class="font-bold">It's public?:</span> <%= event.public_to_string %></div>
-  <%= event_image event %>
-</div>
-
-<div class="max-w-sm w-full lg:max-w-full lg:flex">
-<div class="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full max-w-[48rem] flex-row">
-  <div
-    class="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none bg-clip-border rounded-xl shrink-0">
-    <%= default_event_image event, 'object-cover w-full h-full my-0' %>
-  </div>
-  <div class="p-6">
-    <div class="flex justify-between">
-      <div>
-        <h6
-          class=" block mb-4 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase">
-          🧑🏻 <%= event.user.username %>
-        </h6>
+<div class="grid grid-flow-row justify-center gap-3">
+  <div class="max-w-sm w-full lg:max-w-full lg:flex">
+    <div class="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full max-w-[48rem] flex-row">
+      <div class="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none bg-clip-border rounded-xl shrink-0">
+        <%= default_event_image event, 'object-cover w-full h-full my-0' %>
       </div>
-      <div>
-        <h6
-          class=" block mb-4 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase">
-          🌎 <%= event.location %>
-        </h6>
-      </div>    
-    </div>    
-    <h4 class="block mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-      <%= event.title %>
-    </h4>
-    <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-      <%= event.description %>
-    </p>
-    <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-      Date: <%= event.date%>
-    </p>
-    <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-      Location: <%= event.location%>
-    </p>
-    <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-      Notification time:</span> <%= event.format_notification_datetime %>
-    </p>
-    <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-      Price:</span> <%= event.price%>
-    </p>
-  </div>
-</div>  
+      
+      <div class="p-6">
+        <div class="flex justify-between">
+          <div>
+            <h6 class="font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase mr-5">
+              🧑🏻 <%= event.user.username %>
+            </h6>
+          </div>
+
+          <div>
+            <h6 class="font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase">
+              🌎 <%= event.location %>
+            </h6>
+          </div>    
+        </div>
+        
+        <div>
+          <h4 class="block mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            <%= event.title %>
+          </h4>
+
+          <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+            <%= event.description %>
+          </p>
+
+          <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+            📅 <%= event.date%>
+          </p>
+
+          <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+            🔔 </span> <%= event.format_notification_datetime %>
+          </p>
+
+          <p class="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+            💲</span> <%= event.price%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
