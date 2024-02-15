@@ -1,8 +1,9 @@
+<h1 class="text-center mb-8">Events lists</h1>
 
-<div class = "shadow-lg p-5 rounded-lg">
-  <h1 class="mb-6">Events lists</h1>
+<div class ="shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-center max-w-[470px] mx-auto p-7 rounded-lg">
+  <h2 class="mt-0 mb-4">Options</h2>
 
-  <div class="flex items-center mb-10">
+  <div class="flex items-center justify-center mb-10">
     <%= link_to "Download as CSV", export_events_events_path(format: :csv, dates_range: params[:dates_range],
     date_filter: params[:date_filter], privates: params[:privates]),
     class: 'btn-1 my-0 no-underline' %>
@@ -13,16 +14,22 @@
 </div>
 
 <% if @events.count > 0 %>
-  <% @events.each_with_index do |event, index| %>
-    <div class="mt-10 p-5 rounded-lg shadow-lg">
-      <h2 class="mt-0 mb-3"><%= event.title.capitalize %></h2>
-      <h4 class="font-bold mb-2">By <%= event.user.username %></h4>
-      <h4 class="font-bold mb-5">Planned for <%= event.date %></h4>
+  <div class="mt-10 columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 [&>div:not(:first-child)]:mt-8">
+    <% @events.each_with_index do |event, index| %>
+      <div class="break-inside-avoid flex justify-center items-center">
+        <div class="w-fit p-7 rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-center">
+          <h2 class="mt-0 mb-3"><%= event.title.capitalize %></h2>
+          <h4 class="font-bold mb-2">By <%= event.user.username %></h4>
+          <h4 class="font-bold mb-5">Planned for <%= event.date %></h4>
 
-      <%= preview_event_image event if event.image_is_saved_and_exists? %>
-      <div><%= link_to 'Show event details', event_path(event), class: 'btn-2 py-1 no-underline' %></div>
-    </div>
-  <% end %>
+          <div class="flex justify-center">
+            <%= preview_event_image event %>
+          </div>
+          <div><%= link_to 'Show event details', event_path(event), class: 'btn-2 py-1 no-underline' %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
     
   <div class="mt-6"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
 <% else %>

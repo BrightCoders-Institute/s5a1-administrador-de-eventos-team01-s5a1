@@ -1,23 +1,23 @@
 <h2 class="mt-0 mb-4">Filtering params</h2>
 <%= form_with url: events_path, method: :get do |form| %>
-  <div class='flex items-center mb-5'>
+  <div class='mb-5'>
     <%= form.text_field :dates_range, value: params[:dates_range], 
-                        data: {controller: "daterangepicker"}, class: 'field mb-0' %>
+                        data: {controller: "daterangepicker"}, class: 'rounded px-3 py-2 mb-0' %>
     
-    <div class="flex items-center ml-5">
+    <div class="flex items-center justify-center mt-4">
       <%= form.check_box :date_filter, { checked: ActiveModel::Type::Boolean.new.cast(params[:date_filter]), include_hidden: false }, 
                          'true', 'false' %>
-      <%= form.label :date_filter, 'Filter with dates range', class: 'ml-1 font-semibold' %>
+      <%= form.label :date_filter, 'Filter with dates range', class: 'ml-2 font-semibold' %>
     </div>
 
-    <div class="flex items-center ml-5">
+    <div class="flex items-center justify-center mt-1">
       <%= form.check_box :privates, { checked: ActiveModel::Type::Boolean.new.cast(params[:privates]), include_hidden: false }, 
                          'true', 'false' %>
-      <%= form.label :privates, 'Only private events', class: 'ml-1 font-semibold' %>
+      <%= form.label :privates, 'Only private events', class: 'ml-2 font-semibold' %>
     </div>
   </div>
 
-  <div class='flex items-center'>
+  <div class='flex items-center justify-center'>
     <%= form.submit 'Search', class: 'btn-2 my-0' %>
     <%= link_to 'Clear search', events_path, class: 'btn-3 my-0 ml-3 no-underline' %>
   </div>

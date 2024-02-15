@@ -7,14 +7,14 @@
   <div class="text-lg"><span class="font-bold">Location:</span> <%= event.location %></div>
   <div class="text-lg"><span class="font-bold">Price: </span> <%= event.price %></div>
   <div class="text-lg"><span class="font-bold">It's public?:</span> <%= event.public_to_string %></div>
-  <%= event_image event if event.image_is_saved_and_exists? %>
+  <%= event_image event %>
 </div>
 
 <div class="max-w-sm w-full lg:max-w-full lg:flex">
-<div class="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full max-w-[48rem] flex-row">
+<div class="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full max-w-[48rem] flex-row">
   <div
     class="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none bg-clip-border rounded-xl shrink-0">
-    <%= default_event_image event, 'object-cover w-full h-full' if event.image_is_saved_and_exists? %>
+    <%= default_event_image event, 'object-cover w-full h-full my-0' %>
   </div>
   <div class="p-6">
     <div class="flex justify-between">

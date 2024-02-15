@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center">
-  <div class= "shadow-md rounded-md w-96 p-5">
+  <div class= "shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md w-96 p-7">
     <div class="flex justify-center">
       <h2 class="mt-0 text-center">Forgot your password?</h2>
     </div>
@@ -9,9 +9,9 @@
         <div class="flex flex-col items-center">  
           <%= render "devise/shared/error_messages", resource: resource %>
 
-          <div class="mb-4">
+          <div class="w-full mb-4">
             <div><%= f.label :email, class: 'font-bold text-x' %></div>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email",class: 'rounded w-full mb-4' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'rounded w-full mb-4' %>
           </div>
 
           <div class="flex items-center justify-center flex-col actions">

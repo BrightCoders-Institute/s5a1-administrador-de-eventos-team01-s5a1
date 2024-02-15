@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center">
-  <div class= "shadow-md rounded-md w-90 p-5">
+  <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md w-90 p-7">
     <div class="flex justify-center">
       <h2 class="mt-0">Edit <%= resource_name.to_s.humanize %></h2>
     </div>
@@ -7,42 +7,42 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %> 
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="mb-4">
-        <%= f.label :username, class: 'block text-sm font-bold mb-1' %>
-        <%= f.text_field :username, autofocus: true, class: 'text-sm rounded w-full px-3 py-2' %>
+      <div class="mb-6">
+        <%= f.label :username, class: 'block font-bold mb-1' %>
+        <%= f.text_field :username, autofocus: true, class: 'rounded w-full px-3 py-2' %>
       </div>
 
-      <div class="mb-4">
-        <%= f.label :email, class: 'block text-sm font-bold mb-1' %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'text-sm rounded w-full px-3 py-2' %>
+      <div class="mb-6">
+        <%= f.label :email, class: 'block font-bold mb-1' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'rounded w-full px-3 py-2' %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <div class="text-sm mb-1">
+      <div class="mb-1">
         <%= f.label :password, class: 'font-bold' %> <i>(leave blank if you don't want to change it)</i>
       </div>
 
-      <div class="mb-4">
-        <%= f.password_field :password, autocomplete: "new-password", class: 'text-sm rounded w-full px-3 py-2 mb-1' %>
+      <div class="mb-6">
+        <%= f.password_field :password, autocomplete: "new-password", class: 'rounded w-full px-3 py-2 mb-1' %>
         <% if @minimum_password_length %>
-          <em class="text-sm text-gray-600"><%= @minimum_password_length %> characters minimum</em>
+          <em class="text-gray-600"><%= @minimum_password_length %> characters minimum</em>
         <% end %>
       </div>
       
-      <div class="mb-4">
-        <%= f.label :password_confirmation, class: 'block text-sm font-bold mb-1' %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'text-sm rounded w-full px-3 py-2' %>
+      <div class="mb-6">
+        <%= f.label :password_confirmation, class: 'block font-bold mb-1' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'rounded w-full px-3 py-2' %>
       </div>
 
-      <div class="text-sm mb-1">
+      <div class="mb-1">
         <%= f.label :current_password, class: 'font-bold' %> <i>(we need your current password to confirm your changes)</i>
       </div>
 
       <div class="mb-8">
-        <%= f.password_field :current_password, autocomplete: "current-password", class: 'text-sm rounded w-full px-3 py-2' %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: 'rounded w-full px-3 py-2' %>
       </div>
 
       <div class="flex items-center justify-center flex-col actions">

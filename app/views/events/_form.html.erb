@@ -1,5 +1,5 @@
 
-<%= form_with model: event do |form| %> 
+<%= form_with model: event, class: 'w-full' do |form| %> 
   <% if form.object.errors.any? %>
     <div class="mb-2">
       <% form.object.errors.full_messages.each do |message| %>
@@ -10,53 +10,53 @@
 
   <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <div class="mb-2">
-    <%= form.label :title, 'Title', class: 'block b' %>
-    <%= form.text_field :title, class: 'field'%>
+  <div class="mb-6">
+    <%= form.label :title, 'Title', class: 'block font-bold mb-1' %>
+    <%= form.text_field :title, class: 'rounded w-full px-3 py-2' %>
   </div>
 
-  <div>
-    <%= form.label :description, 'Description', class: 'block b' %>
-    <%= form.text_area :description, class: 'field' %> 
+  <div class="mb-4">
+    <%= form.label :description, 'Description', class: 'block font-bold mb-1' %>
+    <%= form.text_area :description, class: 'rounded w-full px-3 py-2' %> 
   </div>
 
-  <div class="mb-2">
-    <%= form.label :date, 'Date', class: 'block b' %>
-    <%= form.text_field :date, data: {controller: "datepicker"}, class: 'field' %>
+  <div class="mb-6">
+    <%= form.label :date, 'Date', class: 'block font-bold mb-1' %>
+    <%= form.text_field :date, data: {controller: "datepicker"}, class: 'rounded w-full px-3 py-2' %>
   </div>
 
-  <div class="mb-2">
-    <%= form.label :notification_datetime, 'Notification date', class: 'block b' %>
-    <%= form.text_field :notification_datetime, data: {controller: "datetimepicker"}, class: 'field' %>
+  <div class="mb-6">
+    <%= form.label :notification_datetime, 'Notification date', class: 'block font-bold mb-1' %>
+    <%= form.text_field :notification_datetime, data: {controller: "datetimepicker"}, class: 'rounded w-full px-3 py-2' %>
   </div>
 
-  <div class="mb-2">
-    <%= form.label :location, 'Location', class: 'block b' %>
-    <%= form.text_field :location, class: 'field' %> 
+  <div class="mb-6">
+    <%= form.label :location, 'Location', class: 'block font-bold mb-1' %>
+    <%= form.text_field :location, class: 'rounded w-full px-3 py-2' %> 
   </div>
 
-  <div class="mb-2">
-    <%= form.label :price, 'Price', class: 'block b' %>
-    <%= form.number_field :price, step: 0.01, class: 'field' %>
+  <div class="mb-6">
+    <%= form.label :price, 'Price', class: 'block font-bold mb-1' %>
+    <%= form.number_field :price, step: 0.01, class: 'rounded w-full px-3 py-2' %>
   </div>
 
-  <div class="mb-2 flex items-center">
+  <div class="mb-6 flex items-center">
     <%= form.check_box :public %>
-    <%= form.label :public, 'Event Public?', class: 'ml-1 font-semibold' %>
+    <%= form.label :public, 'Event Public?', class: 'ml-2 font-semibold' %>
   </div>
 
-  <div class="mb-2">
-    <%= form.label :image, 'Image', class: 'block b' %>
+  <div class="mb-6">
+    <%= form.label :image, 'Image', class: 'block font-bold mb-1' %>
     <%= image_file_field form %>
 
+    <%= preview_event_image event, 'mt-2 mb-4' %>
     <% if event.image_is_saved_and_exists? %>
-      <%= preview_event_image event, 'mt-2 mb-1' %>
       <%= delete_image_option event %>
     <% end %>
   </div>
 
   <div class="flex">
-    <div><%= form.submit class: 'btn-2 mb-3' %></div>
+    <div><%= form.submit class: 'btn-2 mb-0' %></div>
     <div><%= link_to 'Back', event, class: 'btn-3 ml-3 py-1 no-underline' %></div>
   </div>
 <% end %>
