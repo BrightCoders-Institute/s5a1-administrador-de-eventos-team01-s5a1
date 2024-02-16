@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-<% 2.times do |number| %>
+<% 5.times do |number| %>
   first_user_event<%= number + 1 %>:
     title: BrightEvent no. <%= number + 1 %>
     description: Test event
@@ -22,7 +22,7 @@
     user: second_user
 <% end %>
 
-<% 10.times do |number| %>
+<% 20.times do |number| %>
   first_user_public_event<%= number + 1 %>:
     title: Public BrightEvent no. <%= number + 1 %>
     description: Test event

@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center">
-  <div class= "shadow-md rounded-md w-96 p-5">
+  <div class= "shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md p-7">
     <div class="flex justify-center">
       <h2 class="mt-0">Sign up</h2>
     </div>
@@ -7,25 +7,25 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'w-full' }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="mb-4">
-        <%= f.label :username, class: 'block text-sm font-bold mb-1' %>
-        <%= f.text_field :username, autofocus: true, class: 'text-sm rounded w-full px-3 py-2' %>
+      <div class="mb-6">
+        <%= f.label :username, class: 'block font-bold mb-1' %>
+        <%= f.text_field :username, autofocus: true, class: 'rounded w-full px-3 py-2' %>
       </div>
 
-      <div class="mb-4">
-        <%= f.label :email, class: 'block text-sm font-bold mb-1' %>
-        <%= f.email_field :email, autofocus: true, class: 'text-sm rounded w-full px-3 py-2', autocomplete: "email" %>
+      <div class="mb-6">
+        <%= f.label :email, class: 'block font-bold mb-1' %>
+        <%= f.email_field :email, autofocus: true, class: 'rounded w-full px-3 py-2', autocomplete: "email" %>
       </div>
 
-      <div class="mb-4">
-        <%= f.label :password, class: 'block text-sm font-bold mb-1' %>
-        <%= f.password_field :password, autocomplete: "new-password", class: 'text-sm rounded w-full px-3 py-2 mb-1' %>
-        <em class="text-sm text-gray-600">(6 characters minimum)</em>
+      <div class="mb-6">
+        <%= f.label :password, class: 'block font-bold mb-1' %>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'rounded w-full px-3 py-2 mb-1' %>
+        <em class="text-gray-600">(6 characters minimum)</em>
       </div>
 
       <div class="mb-8">
-        <%= f.label :password_confirmation, class: 'block text-sm font-bold mb-1' %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'text-sm rounded w-full px-3 py-2 border focus:outline-none focus:border-blue-500' %>
+        <%= f.label :password_confirmation, class: 'block font-bold mb-1' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'rounded w-full px-3 py-2 border focus:outline-none focus:border-blue-500' %>
       </div>
 
       <div class="flex items-center justify-center flex-col actions">

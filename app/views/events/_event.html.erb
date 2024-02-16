@@ -1,11 +1,54 @@
-<div class="grid grid-flow-row gap-3 mb-5">
-  <div class="text-lg"><span class="font-bold">Author:</span> <%= event.user.username %></div>
-  <div class="text-lg"><span class="font-bold">Title:</span> <%= event.title %></div>
-  <div class="text-lg"><span class="font-bold">Description:</span> <%= event.description %></div>
-  <div class="text-lg"><span class="font-bold">Date:</span> <%= event.date %></div>
-  <div class="text-lg"><span class="font-bold">Notification time:</span> <%= event.format_notification_datetime %></div>
-  <div class="text-lg"><span class="font-bold">Location:</span> <%= event.location %></div>
-  <div class="text-lg"><span class="font-bold">Price: </span> <%= event.price %></div>
-  <div class="text-lg"><span class="font-bold">Public?:</span> <%= event.public_to_string %></div>
-  <%= event_image event if event.image_is_saved_and_exists? %>
+ <div class="flex justify-center"> 
+  <div class="max-w-[380px] w-full min-[900px]:max-w-[850px]">
+    <div class="flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-full flex-col min-[900px]:flex-row">
+      <div class="w-full min-[900px]:w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-b-none min-[900px]:rounded-b-xl 
+                  min-[900px]:rounded-r-none bg-clip-border rounded-xl shrink-0">
+        <%= event_image event, 'object-cover w-full h-full my-0' %>
+      </div>
+      
+      <div class="p-6">
+        <div class="flex flex-col min-[900px]:flex-row justify-evenly min-[900px]:justify-between">
+          <div class="text-center mb-3 min-[900px]:text-start min-[900px]:mb-0">
+            <h6 class="font-sans break-words text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase min-[900px]:mr-5">
+              🧑🏻 <%= event.user.username %>
+            </h6>
+          </div>
+
+          <div class="text-center mb-3 min-[900px]:text-start min-[900px]:mb-0">
+            <h6 class="font-sans break-words text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase min-[900px]:mr-5">
+              🌎 <%= event.location %>
+            </h6>
+          </div>
+
+          <div class="text-center min-[900px]:text-start">
+            <h6 class="font-sans break-words text-base antialiased font-semibold leading-relaxed tracking-normal text-gray-700 uppercase">
+              ⚙️ <%= event.public_string_status %>
+            </h6>
+          </div>
+        </div>
+        
+        <div class="text-center mt-8 min-[900px]:text-start">
+          <h4 class="block break-words mt-0 mb-2 font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            <%= event.title %>
+          </h4>
+
+          <p class="block break-words	mb-8 font-sans font-medium italic text-base antialiased leading-relaxed text-gray-700">
+            <%= event.description %>
+          </p>
+
+          <p class="block break-words	mb-5 mt-0 font-sans font-medium text-base antialiased leading-relaxed text-gray-700">
+            📅 <%= event.date%>
+          </p>
+
+          <p class="block break-words	mb-5 mt-0 font-sans font-medium text-base antialiased leading-relaxed text-gray-700">
+            🔔 <%= event.format_notification_datetime %>
+          </p>
+
+          <p class="block break-words	my-0 font-sans font-medium text-base antialiased leading-relaxed text-gray-700">
+            💲<%= event.price%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>  
 </div>

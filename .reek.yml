@@ -4,6 +4,7 @@ detectors:
     enabled: false
   FeatureEnvy:
     exclude:
+      - "EventsHelper#event_image"
       - "EventsController#save_previous_generated_errors"
   NestedIterators:
     exclude:

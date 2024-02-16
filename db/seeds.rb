@@ -16,7 +16,7 @@ first_user.update(email: 'brighteventsexample@outlook.com', password: '123123', 
 second_user = User.where(username: 'SecondUser').first_or_initialize
 second_user.update(email: 'erikgomez198755@outlook.com', password: '123123', password_confirmation: '123123')
 
-2.times do |number|
+5.times do |number|
   event = first_user.events.where(title: "BrightEvent no. #{number + 1}").first_or_initialize
   event.update(description: 'Test event', date: Time.current + (number + 1).days,
                notification_datetime: Time.current - 1.days, location: 'Test location', price: 10, public: false)
@@ -26,7 +26,7 @@ second_user.update(email: 'erikgomez198755@outlook.com', password: '123123', pas
                notification_datetime: Time.current - 1.day, location: 'Test location', price: 10, public: false)
 end
 
-10.times do |number|
+20.times do |number|
   event = first_user.events.where(title: "Public BrightEvent no. #{number + 1}").first_or_initialize
   event.update(description: 'Test event', date: Time.current + (number + 1).days,
                notification_datetime: Time.current - 1.days, location: 'Test location', price: 10, public: true)

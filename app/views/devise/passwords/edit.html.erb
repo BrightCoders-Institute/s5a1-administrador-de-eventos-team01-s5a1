@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center">
-  <div class= "shadow-md rounded-md w-96 p-5">
+  <div class= "shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md w-96 p-7">
     <div class="flex justify-center">
       <h2 class="mt-0 text-center">Change your password</h2>
     </div>
@@ -8,12 +8,12 @@
         <%= render "devise/shared/error_messages", resource: resource %>
         <%= f.hidden_field :reset_password_token %>
 
-        <div class="mb-4">
+        <div class="mb-6">
           <%= f.label :password, "New password", class: 'font-bold text-x' %>
           <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %>
-          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'rounded w-full mb-4' %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'rounded w-full' %>
         </div>
 
         <div class="mb-4">
@@ -23,7 +23,7 @@
 
         <div class="flex items-center justify-center flex-col actions">
           <%= render "devise/shared/links" %>
-          <%= f.submit "Change my password", class:'btn_log mt-3' %>
+          <%= f.submit "Change password", class:'btn_log mt-3' %>
         </div>
       <% end %>
   </div>

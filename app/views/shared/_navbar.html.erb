@@ -1,18 +1,24 @@
-<nav class="sticky top-0 bg-slate-800 h-28 w-full flex flex-row">
-  <div class="w-full py-5 pl-6 pr-9 flex items-center">
-    <%= image_tag("logo.png", class:"mr-8 my-0 h-4/5") %>
-    <%= print_home_link %>
+<nav class="sticky top-0 bg-slate-800 h-fit w-full flex flex-row justify-center">
+  <div class="w-full py-5 px-4 md:py-7 md:pl-6 md:pr-9 flex flex-col min-[805px]:flex-row items-center max-w-screen-2xl 2xl:px-6 min-[1600px]:px-0">
+    <div>
+      <%= image_tag "logo.png", class: "h-auto min-[288px]:max-w-64 mt-0 mb-4 min-[805px]:mb-0 min-[805px]:mr-8" %>
+    </div>
+    
+    <div class="w-full text-center overflow-x-auto min-[805px]:text-start">
+      <div class="inline-flex items-center mx-auto mb-4 min-[805px]:mb-0">
+        <%= print_home_link %>
 
-    <% if user_signed_in? %>
-      <%= print_get_started_link %>
-      <%= print_edit_profile_link %>
-      <%= print_sign_out_button %>
+        <% if user_signed_in? %>
+          <%= print_get_started_link %>
+          <%= print_edit_profile_link %>
+          <%= print_sign_out_button %>
+        <% else %>
+          <%= print_sign_in_link %>
+        <% end %>
+      </div>
+    </div>
 
-    <% else %>
-      <%= print_sign_in_link %>
-    <% end %>
-
-    <div class="grow flex justify-end">
+    <div class="grow flex justify-end min-[805px]:ml-8">
       <%= print_username %>
     </div>
   </div>
