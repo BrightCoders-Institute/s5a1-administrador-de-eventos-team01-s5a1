@@ -1,9 +1,1 @@
-<div class="flex items-center justify-center">
-  <div class= "shadow-[0_3px_10px_rgb(0,0,0,0.2)] min-w-[500px] rounded-md p-7">
-    <div class="flex justify-center">
-      <h2 class="mt-0">New event</h2>
-    </div>
-
-    <%= render 'form', event: @event %>
-  </div>
-</div>
+<%= render 'form', event: @event, title: 'New event' %>

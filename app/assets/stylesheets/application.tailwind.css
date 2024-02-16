@@ -28,7 +28,7 @@
 
 .pagy-nav,
 .pagy-nav-js {
-  @apply flex space-x-2;
+  @apply flex justify-center md:justify-start space-x-2;
 }
 
 .pagy-nav .page a,

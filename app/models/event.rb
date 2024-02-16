@@ -37,6 +37,10 @@ class Event < ApplicationRecord
     public ? 'Yes' : 'No'
   end
 
+  def public_string_status
+    public ? 'Public' : 'Private'
+  end
+
   def format_notification_datetime
     notification_datetime.strftime('%Y-%m-%d %H:%M:%S')
   end

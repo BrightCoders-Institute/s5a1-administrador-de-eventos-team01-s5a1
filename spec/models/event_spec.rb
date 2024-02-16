@@ -122,6 +122,17 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  describe 'public_string_status method' do
+    it "returns 'Public' when public is true" do
+      update_test_model_attribute('public', true)
+      test_event_conditions(@event.public_string_status, 'Public')
+    end
+
+    it "returns 'Private' when public is false" do
+      test_event_conditions(@event.public_string_status, 'Private')
+    end
+  end
+
   describe 'schedule_event? method' do
     yesterday = Time.current - 1.days
     tomorrow = Time.current + 1.days

@@ -11,12 +11,9 @@ module EventsHelper
     tag.div class: 'mb-6 flex items-center' do
       # button_to helper breaks all the new and edit forms functionality.
       link_to 'Delete image', purge_image_event_path(event),
-              class: 'btn-1 mt-1 mb-2 py-0 no-underline', data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
+              class: 'btn-1 mt-1 mb-2 py-0 no-underline',
+              data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
     end
-  end
-
-  def default_event_image(event, classes = 'mt-3 mb-4')
-    image_tag event.image_is_saved_and_exists? ? event.image : NO_IMAGE_JPG_PATH, class: classes
   end
 
   def event_image(event, classes = 'mt-3 mb-4')

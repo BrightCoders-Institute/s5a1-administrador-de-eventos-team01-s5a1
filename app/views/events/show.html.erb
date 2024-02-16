@@ -1,14 +1,14 @@
-<h1 class="mb-6 text-center">Event details</h1>
+<h1 class="mb-6 break-all text-center">Event details</h1>
 <div>
   <%= render 'event', event: @event %>
-  <div class="flex mt-5">
+  <div class="flex flex-col min-[380px]:flex-row items-center justify-center mt-8">
     <% if current_user.id == @event.user.id %>
-      <div class="mb-3"><%= link_to 'Edit event', edit_event_path(@event), class: 'btn-1 py-1 no-underline mr-3' %></div>
+      <%= link_to 'Edit event', edit_event_path(@event), class: 'inline-block mt-0 btn-1 mb-2 no-underline min-[380px]:mr-3 min-[380px]:mb-0' %>
       
-      <%= button_to 'Delete event', event_path(@event), class: 'btn-2 mb-3 mr-3', 
+      <%= button_to 'Delete event', event_path(@event), class: 'btn-2 mb-2 mr-0 min-[380px]:mb-0 min-[380px]:mr-3 text-center',
       method: :delete, data: {turbo_confirm: "Are you sure?"} %> 
     <% end %>
     
-    <div class="mb-3"><%= link_to 'Back', events_path, class: 'btn-3 py-1 no-underline' %></div>
+    <%= link_to 'Back', events_path, class: 'inline-block btn-3 no-underline' %>
   </div>
 </div>
