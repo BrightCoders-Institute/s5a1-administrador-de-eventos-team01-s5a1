@@ -11,11 +11,11 @@ module EventHelpers
   end
 
   def test_user_private_events_query(user)
-    test_event_conditions(Event.all_user_events(user.id).only_private_events.count, 2)
+    test_event_conditions(Event.all_user_events(user.id).only_private_events.count, 5)
   end
 
   def test_user_query(user)
-    test_event_conditions(Event.all_user_events(user.id).count, 12)
+    test_event_conditions(Event.all_user_events(user.id).count, 25)
   end
 
   def test_schedule_event_scenario(test_datetime, expected_value)

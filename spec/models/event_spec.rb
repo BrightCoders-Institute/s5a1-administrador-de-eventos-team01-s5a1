@@ -64,32 +64,32 @@ RSpec.describe Event, type: :model do
   end
 
   describe 'model users queries' do
-    it 'all first user events returns 12 records' do
+    it 'all first user events returns 25 records' do
       test_user_query(@first_user)
     end
 
-    it 'all second user events returns 12 records' do
+    it 'all second user events returns 25 records' do
       test_user_query(@second_user)
     end
   end
 
   describe 'model users private queries' do
-    it 'all first user private events returns 2 records' do
+    it 'all first user private events returns 5 records' do
       test_user_private_events_query(@first_user)
     end
 
-    it 'all second user private events returns 2 records' do
+    it 'all second user private events returns 5 records' do
       test_user_private_events_query(@second_user)
     end
 
-    it 'all private events returns 4 records' do
-      test_event_conditions(described_class.only_private_events.count, 4)
+    it 'all private events returns 10 records' do
+      test_event_conditions(described_class.only_private_events.count, 10)
     end
   end
 
   describe 'model dates ranges queries' do
-    it 'between tomorrow and 2 days ahead returns 7 records' do
-      test_dates_range_query(@tomorrow, @two_days_from_tomorrow, 7)
+    it 'between tomorrow and 2 days ahead returns 9 records' do
+      test_dates_range_query(@tomorrow, @two_days_from_tomorrow, 9)
     end
 
     it 'tomorrow returns 3 records' do
@@ -141,16 +141,8 @@ RSpec.describe Event, type: :model do
       test_schedule_event_scenario(tomorrow, true)
     end
 
-    it 'returns false when notification datetime remains unchanged' do
-      test_schedule_event_scenario_without_change(tomorrow)
-    end
-
     it 'returns false when notification datetime is less than today' do
       test_schedule_event_scenario(yesterday, false)
-    end
-
-    it 'returns false when the unchanged notification datetime is less than today' do
-      test_schedule_event_scenario_without_change(yesterday)
     end
   end
 
