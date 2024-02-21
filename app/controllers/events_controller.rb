@@ -38,7 +38,7 @@ class EventsController < ApplicationController
     previous_notification_datetime = previous_event.notification_datetime
 
     if @event.update(events_params)
-      if @event.schedule_event?(previous_notification_datetime)
+      if @event.schedule_event?
         EventReminderJob.set(wait_until: @event.notification_datetime).perform_later(@event.id, @event.updated_at)
       end
       redirect_to @event

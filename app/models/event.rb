@@ -45,14 +45,8 @@ class Event < ApplicationRecord
     notification_datetime.strftime('%Y-%m-%d %H:%M:%S')
   end
 
-  def schedule_event?(previous_notification_datetime = nil)
-    previous_datetime = if previous_notification_datetime.nil?
-                          previous_notification_datetime
-                        else
-                          previous_notification_datetime.beginning_of_minute
-                        end
-
-    Time.current < notification_datetime && notification_datetime.beginning_of_minute != previous_datetime
+  def schedule_event?
+    Time.current < notification_datetime
   end
 
   def self.to_csv(records)
